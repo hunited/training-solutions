@@ -1,4 +1,4 @@
-package classsctructuremethods;
+package classstructuremethods;
 
 public class Client {
     private String name;

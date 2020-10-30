@@ -1,4 +1,4 @@
-package classsctructuremethods;
+package classstructuremethods;
 
 public class Note {
     private String name;

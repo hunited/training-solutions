@@ -1,4 +1,4 @@
-package classsctructuremethods;
+package classstructuremethods;
 
 public class ClientMain {
     public static void main(String[] args) {
