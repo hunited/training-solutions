@@ -6,6 +6,8 @@ public class Bank {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        String newData = "A számla új adatai: ";
+
         System.out.println("Mi a számlaszám?");
         String accountNumber = scanner.nextLine();
 
@@ -23,13 +25,13 @@ public class Bank {
         int deposit = scanner.nextInt();
         account.deposit(deposit);
         scanner.nextLine();
-        System.out.println("A számla új adatai: "+account.getInfo());
+        System.out.println(newData+account.getInfo());
 
         System.out.println("Mekkora összeget venne fel?");
         int withdraw = scanner.nextInt();
         account.withdraw(withdraw);
         scanner.nextLine();
-        System.out.println("A számla új adatai: "+account.getInfo());
+        System.out.println(newData+account.getInfo());
 
         System.out.println("A másik számla száma?");
         String accountNumberTwo = scanner.nextLine();
@@ -48,13 +50,13 @@ public class Bank {
         int depositTwo = scanner.nextInt();
         accountTwo.deposit(depositTwo);
         scanner.nextLine();
-        System.out.println("A számla új adatai: "+accountTwo.getInfo());
+        System.out.println(newData+accountTwo.getInfo());
 
         System.out.println("Mekkora összeget venne fel?");
         int withdrawTwo = scanner.nextInt();
         accountTwo.withdraw(withdrawTwo);
         scanner.nextLine();
-        System.out.println("A számla új adatai: "+accountTwo.getInfo());
+        System.out.println(newData+accountTwo.getInfo());
 
         System.out.println("Mekkora összeget utal az elsőről a második számlára?");
         int transfer = scanner.nextInt();
