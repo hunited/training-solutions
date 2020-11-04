@@ -17,10 +17,19 @@ public class Product {
         return code;
     }
 
+    /* Én megoldásom
     public boolean areTheyEqual(Product p) {
         return (name.equals(p.getName()) &&
                (code.length() == p.code.length() || code.length() == p.code.length()+1 || code.length() == p.code.length()-1)
         );
+    }
+    */
+
+    // Tanár megoldása
+    public boolean areTheyEqual(Product p) {
+        boolean nameEqual = name.equals(p.getName());
+        boolean codeDifference = Math.abs(code.length()-p.getCode().length()) <= 1;
+        return nameEqual && codeDifference;
     }
 
     public static void main(String[] args) {
