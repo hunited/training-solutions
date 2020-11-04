@@ -10,11 +10,10 @@ public class Sum {
         Scanner scanner = new Scanner(System.in);
         int sum = 0;
 
-        for (int i = 0; i < 5; i = i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.print((i + 1) + ". szám: ");
             int number = scanner.nextInt();
             sum += number;
-            i++;
         }
 
         System.out.println("Végösszeg: " + sum);
