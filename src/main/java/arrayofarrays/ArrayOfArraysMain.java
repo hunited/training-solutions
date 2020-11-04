@@ -43,12 +43,15 @@ public class ArrayOfArraysMain {
     }
 
     public int[][] getValues() {
-        int[][] values = new int[12][];
-        int[] numberOfDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        for (int i = 0; i < numberOfDays.length; i++) {
-            values[i] = new int[numberOfDays[i]];
+        int[][] months = new int[12][];
+        int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        for (int i = 0; i < monthDays.length; i++) {
+            months[i] = new int[monthDays[i]];
+            for (int j = 0; j < monthDays[i]; j++) {
+                months[i][j] = j + 1;
+            }
         }
-        return values;
+        return months;
     }
 
     public static void main(String[] args) {
@@ -61,7 +64,7 @@ public class ArrayOfArraysMain {
         System.out.println("Mátrix");
         arrayOfArraysMain.printArrayOfArrays(arrayOfArraysMain.triangularMatrix(10));
 
-        System.out.println("A hónap napjai");
+        System.out.println("Az év hónapjai és napjai");
         arrayOfArraysMain.printArrayOfArrays(arrayOfArraysMain.getValues());
     }
 }
