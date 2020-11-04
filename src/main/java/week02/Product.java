@@ -18,7 +18,7 @@ public class Product {
     }
 
     public boolean areTheyEqual(Product p) {
-        if (this.name == p.name) {
+        if (this.name == p.name && this.code.length()== p.code.length()) {
             return true;
         } else {
             return false;
@@ -31,5 +31,6 @@ public class Product {
         Product product3 = new Product("körte", "a03");
 
         System.out.println(product1.areTheyEqual(product2));
+        System.out.println(product2.areTheyEqual(product3));
     }
 }
