@@ -18,7 +18,7 @@ public class Product {
     }
 
     public boolean areTheyEqual(Product p) {
-        if (this.name.equals(p.name) && this.code.length()== p.code.length()) {
+        if (name.equals(p.getName()) && code.length() == p.code.length()) {
             return true;
         } else {
             return false;
