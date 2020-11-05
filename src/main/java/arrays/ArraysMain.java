@@ -50,7 +50,7 @@ public class ArraysMain {
 
         int[] winner = new int[]{1, 2, 3, 4, 5};
         int[] myNumbers = new int[]{5, 4, 1, 3, 2};
-        System.out.println("Nert e: " + arraysMain.wonLottery(winner, myNumbers));
+        System.out.println("Nyert e: " + arraysMain.wonLottery(winner, myNumbers));
 
         String winNumbers = Arrays.toString(winner);
         System.out.println(winNumbers);
