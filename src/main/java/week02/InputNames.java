@@ -14,8 +14,10 @@ public class InputNames {
             name[i] = scanner.nextLine();
         }
 
+        int i = 0;
         for (String names : name) {
-            System.out.println(names);
+            i++;
+            System.out.println(i + ". név: " + names);
         }
 
     }
