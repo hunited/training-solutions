@@ -8,12 +8,14 @@ public class InputNames {
         String[] name = new String[5];
 
         Scanner scanner = new Scanner(System.in);
+
         for (var i = 0; i < name.length; i++) {
             System.out.println("Add meg a(z) " + (i + 1) + ". nevet!");
             name[i] = scanner.nextLine();
         }
-        for (var i = 0; i < name.length; i++) {
-            System.out.println(name[i]);
+
+        for (String names : name) {
+            System.out.println(names);
         }
 
     }
