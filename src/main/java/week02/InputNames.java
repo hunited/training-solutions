@@ -1,5 +1,6 @@
 package week02;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputNames {
@@ -19,6 +20,8 @@ public class InputNames {
             i++;
             System.out.println(i + ". név: " + names);
         }
+
+        System.out.println(Arrays.toString(name));
 
     }
 }
