@@ -7,13 +7,13 @@ public class Languages {
 
     public static void main(String[] args) {
 
-        List<String> myList = new ArrayList<>();
-        myList.add("Java");
-        myList.add("Phyton");
-        myList.add("JavaScript");
+        List<String> languages = new ArrayList<>();
+        languages.add("Java");
+        languages.add("Phyton");
+        languages.add("JavaScript");
 
-        for (String i : myList) {
-            if (i.length() > 5) {
+        for (String lang : languages) {
+            if (lang.length() > 5) {
                 System.out.println(i);
             }
         }
