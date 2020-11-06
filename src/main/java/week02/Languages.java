@@ -14,7 +14,7 @@ public class Languages {
 
         for (String lang : languages) {
             if (lang.length() > 5) {
-                System.out.println(i);
+                System.out.println(lang);
             }
         }
     }
