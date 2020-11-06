@@ -5,42 +5,48 @@ import java.util.List;
 
 public class Capsules {
 
-    List<String > colors = new ArrayList<>();
+    List<String> colors = new ArrayList<>();
 
-   public void addLast(String color) {
-       colors.add(color);
+    public void addLast(String color) {
+        colors.add(color);
     }
 
     public void addFirst(String color) {
-       colors.add(0, color);
+        colors.add(0, color);
     }
 
     public void removeFirst() {
-       colors.remove(0);
+        colors.remove(0);
     }
 
     public void removeLast() {
-       colors.remove(colors.size() - 1);
+        colors.remove(colors.size() - 1);
     }
 
     public List<String> getColors() {
-       return colors;
+        return colors;
     }
 
     public static void main(String[] args) {
 
-       Capsules capsules = new Capsules();
+        Capsules capsules = new Capsules();
 
-       capsules.addFirst("Piros");
-       capsules.addFirst("Sárga");
-       capsules.addFirst("Fekete");
-       capsules.addFirst("Zöld");
-       capsules.addLast("Arany");
-       capsules.addLast("Arany Pöttyös");
-       capsules.removeFirst();
-       capsules.removeLast();
+        capsules.addFirst("Piros");
+        capsules.addFirst("Sárga");
+        capsules.addFirst("Fekete");
+        capsules.addFirst("Zöld");
+        capsules.addLast("Arany");
+        capsules.addLast("Arany Pöttyös");
+        capsules.removeFirst();
+        capsules.removeLast();
 
-       System.out.println(capsules.getColors());
+        System.out.println(capsules.getColors());
+
+        List<String> clear = new ArrayList<>(capsules.getColors());
+        System.out.println(clear);
+        clear.clear();
+        System.out.println(clear);
+        System.out.println(capsules.getColors());
 
     }
 
