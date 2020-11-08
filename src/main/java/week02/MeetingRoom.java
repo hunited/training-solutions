@@ -20,8 +20,9 @@ public class MeetingRoom {
         return name;
     }
 
-    public void setName(String name) {
+    public MeetingRoom setName(String name) {
         this.name = name;
+        return null;
     }
 
     public int getLength() {
