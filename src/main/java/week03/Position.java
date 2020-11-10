@@ -13,6 +13,14 @@ public class Position {
         this.bonus = bonus;
     }
 
+    @Override
+    public String toString() {
+        return "Position{" +
+                "name='" + name + '\'' +
+                ", bonus=" + bonus +
+                '}';
+    }
+
     public String getName() {
         return name;
     }
@@ -27,14 +35,6 @@ public class Position {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
-    }
-
-    @Override
-    public String toString() {
-        return "Position{" +
-                "name='" + name + '\'' +
-                ", bonus=" + bonus +
-                '}';
     }
 
     public static void main(String[] args) {
