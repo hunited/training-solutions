@@ -1,6 +1,5 @@
 package week03;
 
-import introjunit.Gentleman;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +17,7 @@ public class PhoneParserTest {
         Phone phone = parser.parse(s);
 
         // Then
-        assertEquals("80-6666666", phone);
+        assertEquals("80-6666666", phone.toString());
 
     }
 
