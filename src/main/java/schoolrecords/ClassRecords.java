@@ -13,22 +13,28 @@ public class ClassRecords {
     List<Student> students = new ArrayList<>();
 
     public ClassRecords(String className, Random rnd) {
+        if (isEmpty(className)) {
+            throw new IllegalArgumentException("Class name must not be empty");
+        }
         this.className = className;
         this.rnd = rnd;
     }
 
     public boolean addStudent(Student student) {
-        boolean found = false;
+        if (student == null) {
+            throw new NullPointerException("Student must be provided!");
+        }
+        boolean toAdd = true;
         for (Student student1 : students) {
             if (student1.getName().equals(student.getName())) {
-                found = true;
+                toAdd = false;
                 break;
             }
         }
-        if (!found) {
+        if (toAdd) {
             students.add(student);
         }
-        return found;
+        return toAdd;
     }
 
     public double calculateClassAverage() {
@@ -47,6 +53,9 @@ public class ClassRecords {
     }
 
     public double calculateClassAverageBySubject(Subject subject) {
+        if (subject == null) {
+            throw new NullPointerException("Subject must be provided!");
+        }
         double studensSum = 0.0;
         int studentNum = 0;
         for (Student student : students) {
@@ -59,6 +68,9 @@ public class ClassRecords {
     }
 
     public Student findStudentByName(String name) {
+        if (isEmpty(name)) {
+            throw new IllegalArgumentException("Student name must not be empty!");
+        }
         Student foundStudent = null;
         for (Student student : students) {
             if (name.equals(student.getName())) {
@@ -86,6 +98,9 @@ public class ClassRecords {
     }
 
     public boolean removeStudent(Student student) {
+        if (student == null) {
+            throw new NullPointerException("Student must be provided!");
+        }
         boolean found = false;
         for (Student student1 : students) {
             if (student1.getName().equals(student.getName())) {
@@ -98,7 +113,12 @@ public class ClassRecords {
     }
 
     public Student repetition() {
-        return students.get(rnd.nextInt(students.size()));
+        try {
+            return students.get(rnd.nextInt(students.size()));
+        } catch (IllegalStateException ise) {
+            throw new IllegalStateException("No students to select for repetition!", ise);
+        }
+
     }
 
     public String getClassName() {

@@ -9,6 +9,9 @@ public class Mark {
     private Tutor tutor;
 
     public Mark(MarkType markType, Subject subject, Tutor tutor) {
+        if (markType == null || subject == null || tutor == null) {
+            throw new NullPointerException("Both subject and tutor must be provided!");
+        }
         this.markType = markType;
         this.subject = subject;
         this.tutor = tutor;

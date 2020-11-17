@@ -14,6 +14,9 @@ public enum MarkType {
 
     MarkType(int value, String description) {
         this.value = value;
+        if (isEmpty(description)) {
+            throw new IllegalArgumentException("Description must not be empty");
+        }
         this.description = description;
     }
 
@@ -23,6 +26,10 @@ public enum MarkType {
 
     public String getDescription() {
         return description;
+    }
+
+    private boolean isEmpty(String str) {
+        return str == null || "".equals(str.trim());
     }
 
 }

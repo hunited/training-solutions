@@ -14,6 +14,9 @@ public class Tutor {
     }
 
     public Tutor(String name, List<Subject> taughtSubject) {
+        if (isEmpty(name)) {
+            throw new IllegalArgumentException("Name must not be empty");
+        }
         this.name = name;
         this.taughtSubject = taughtSubject;
     }
@@ -28,4 +31,9 @@ public class Tutor {
         }
         return found;
     }
+
+    private boolean isEmpty(String str) {
+        return str == null || "".equals(str.trim());
+    }
+
 }
