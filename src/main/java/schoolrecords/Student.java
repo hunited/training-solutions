@@ -30,17 +30,12 @@ public class Student {
         }
         double marksSum = 0.0;
         int markNum = 0;
-        try {
-            for (Mark mark : marks) {
-                if (mark.getSubject().getSubjectName().equals(subject.getSubjectName())) {
-                    marksSum += mark.getMarkType().getValue();
-                    markNum++;
-                }
+        for (Mark mark : marks) {
+            if (mark.getSubject().getSubjectName().equals(subject.getSubjectName())) {
+                marksSum += mark.getMarkType().getValue();
+                markNum++;
             }
-        } catch (ArithmeticException ae) {
-            throw new ArithmeticException("No marks present, average calculation aborted!");
         }
-
         return Math.round((marksSum / markNum) * 100) / 100.0;
     }
 
@@ -62,7 +57,6 @@ public class Student {
     @Override
     public String toString() {
         String messages = getName();
-
         for (int i = 0; i < marks.size(); i++) {
             messages += " marks: " + marks.get(i).getSubject().getSubjectName()
                     + ": " + marks.get(i).getMarkType().getDescription()

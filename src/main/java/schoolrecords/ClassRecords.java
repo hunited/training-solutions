@@ -14,24 +14,20 @@ public class ClassRecords {
 
     public ClassRecords(String className, Random rnd) {
         if (isEmpty(className)) {
-            throw new IllegalArgumentException("Class name must not be empty");
+            throw new IllegalArgumentException("Class name must not be empty!");
         }
         this.className = className;
         this.rnd = rnd;
     }
 
     public boolean addStudent(Student student) {
-        boolean toAdd = true;
         for (Student student1 : students) {
             if (student1.getName().equals(student.getName())) {
-                toAdd = false;
-                break;
+                return false;
             }
         }
-        if (toAdd) {
-            students.add(student);
-        }
-        return toAdd;
+        students.add(student);
+        return true;
     }
 
     public double calculateClassAverage() {
@@ -63,6 +59,7 @@ public class ClassRecords {
                 studentNum++;
             }
         }
+        //return Double.parseDouble(String.format(Locale.US, "%.2f", studensSum / studentNum));
         return Math.round((studensSum / studentNum) * 100) / 100.0;
     }
 
@@ -78,9 +75,10 @@ public class ClassRecords {
             if (name.equals(student.getName())) {
                 foundStudent = student;
                 break;
-            } else {
-                throw new IllegalArgumentException("Student by this name cannot be found! " + name);
             }
+        }
+        if (foundStudent == null) {
+            throw new IllegalArgumentException("Student by this name cannot be found! " + name);
         }
         return foundStudent;
     }
