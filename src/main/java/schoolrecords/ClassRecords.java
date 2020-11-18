@@ -21,9 +21,6 @@ public class ClassRecords {
     }
 
     public boolean addStudent(Student student) {
-        if (student == null) {
-            throw new NullPointerException("Student must be provided!");
-        }
         boolean toAdd = true;
         for (Student student1 : students) {
             if (student1.getName().equals(student.getName())) {
@@ -38,7 +35,7 @@ public class ClassRecords {
     }
 
     public double calculateClassAverage() {
-        if (students.size() == 0) {
+        if (students.isEmpty()) {
             throw new ArithmeticException("No student in the class, average calculation aborted!");
         }
         double studensSum = 0.0;
@@ -47,6 +44,8 @@ public class ClassRecords {
             if (student.calculateAverage() > 0) {
                 studensSum += student.calculateAverage();
                 studentNum++;
+            } else {
+                throw new ArithmeticException("No marks present, average calculation aborted!");
             }
         }
         return Math.round((studensSum / studentNum) * 100) / 100.0;
@@ -71,11 +70,16 @@ public class ClassRecords {
         if (isEmpty(name)) {
             throw new IllegalArgumentException("Student name must not be empty!");
         }
+        if (students.size() == 0) {
+            throw new IllegalStateException("No students to search!");
+        }
         Student foundStudent = null;
         for (Student student : students) {
             if (name.equals(student.getName())) {
                 foundStudent = student;
                 break;
+            } else {
+                throw new IllegalArgumentException("Student by this name cannot be found! " + name);
             }
         }
         return foundStudent;
@@ -113,12 +117,10 @@ public class ClassRecords {
     }
 
     public Student repetition() {
-        try {
-            return students.get(rnd.nextInt(students.size()));
-        } catch (IllegalStateException ise) {
-            throw new IllegalStateException("No students to select for repetition!", ise);
+        if (students.size() == 0) {
+            throw new IllegalStateException("No students to select for repetition!");
         }
-
+        return students.get(rnd.nextInt(students.size()));
     }
 
     public String getClassName() {

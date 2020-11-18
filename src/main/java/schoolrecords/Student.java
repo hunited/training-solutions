@@ -17,9 +17,6 @@ public class Student {
     }
 
     public double calculateAverage() {
-        if (marks == null) {
-            throw new ArithmeticException("No marks present, average calculation aborted!");
-        }
         double marksSum = 0.0;
         for (Mark mark : marks) {
             marksSum += mark.getMarkType().getValue();
