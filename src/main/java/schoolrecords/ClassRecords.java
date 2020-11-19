@@ -72,7 +72,7 @@ public class ClassRecords {
         }
         Student foundStudent = null;
         for (Student student : students) {
-            if (name.equals(student.getName())) {
+            if (name.toLowerCase().equals(student.getName().toLowerCase())) {
                 foundStudent = student;
                 break;
             }
@@ -105,7 +105,7 @@ public class ClassRecords {
         }
         boolean found = false;
         for (Student student1 : students) {
-            if (student1.getName().equals(student.getName())) {
+            if (student1.getName().toLowerCase().equals(student.getName().toLowerCase())) {
                 found = true;
                 students.remove(student1);
                 break;
