@@ -170,8 +170,8 @@ public class SchoolRecordsController {
             Subject sSubject = new Subject(scanner.nextLine());
             System.out.println("Tanár neve: ");
             String sTeacher = scanner.nextLine();
-
             whoRepetition.grading(new Mark(sMarkType, sSubject, new Tutor(sTeacher, Arrays.asList(sSubject))));
+            System.out.println(whoRepetition.toString());
         } catch (Exception e) { //Milyen kivétel?
 
         }
