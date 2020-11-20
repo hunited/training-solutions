@@ -11,7 +11,7 @@ public class CharOperationsTest {
     @Test
     public void charTest() {
         CharOperations ca = new CharOperations();
-        List<Integer> test = List.of(3);
+        List<Integer> test = List.of(0, 3);
         assertEquals(test, ca.getPositionOfChar("Alma", "a"));
     }
 
