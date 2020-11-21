@@ -92,6 +92,9 @@ public class ClassRecords {
     }
 
     public List<StudyResultByName> listStudyResults() {
+        if (students.isEmpty()) {
+            throw new IllegalStateException("No student in the list!");
+        }
         List<StudyResultByName> studyResultByNames = new ArrayList<>();
         for (Student student : students) {
             studyResultByNames.add(new StudyResultByName(student.calculateAverage(), student.getName()));

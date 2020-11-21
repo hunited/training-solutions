@@ -16,14 +16,6 @@ public class SchoolRecordsController {
 
     private List<Subject> subjects = new ArrayList<>();
 
-    public List<Tutor> getTutors() {
-        return tutors;
-    }
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
-
     public void initSchool() {
 
         Subject math = new Subject("matematika");
@@ -150,10 +142,12 @@ public class SchoolRecordsController {
     public String sTeacherWorker(Subject subject) {
         System.out.println("Tanár neve: ");
         List<String> temp = new ArrayList<>();
+        int temp2 = 0;
         for (int i = 0; i < tutors.size(); i++) {
             if (tutors.get(i).tutorTeachingSubject(subject)) {
-                System.out.println("" + (i + 1) + " " + tutors.get(i).getName());
                 temp.add(tutors.get(i).getName());
+                temp2++;
+                System.out.println("" + (temp2) + " " + tutors.get(i).getName());
             }
         }
         int selection = Integer.parseInt(scanner.nextLine());
@@ -164,26 +158,6 @@ public class SchoolRecordsController {
             }
         }
         return sTeacher;
-    }
-
-    public void teachersAndSubjects() {
-        for (int i = 0; i < tutors.size(); i++) {
-            for (int j = 0; j < subjects.size(); j++) {
-                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
-                    System.out.println(tutors.get(i).getName() + " taníthat " + subjects.get(j).getSubjectName() + " tantárgyat.");
-                }
-            }
-        }
-    }
-
-    public void subjectsAndTeachers() {
-        for (int j = 0; j < subjects.size(); j++) {
-            for (int i = 0; i < tutors.size(); i++) {
-                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
-                    System.out.println("A(z) " + subjects.get(j).getSubjectName() + " tantárgyat " + tutors.get(i).getName() + " taníthatja.");
-                }
-            }
-        }
     }
 
     public void menu1() {
@@ -253,41 +227,54 @@ public class SchoolRecordsController {
 
     public void menu6() {
         try {
-
-        } catch (Exception e) { //Milyen kivétel?
-
+            System.out.println("Az osztály tantárgyfüggetlen átlaga: " + cr.calculateClassAverage());
+        } catch (ArithmeticException ae) {
+            throw new IllegalStateException("Hiba történt: " + ae.getMessage());
         }
     }
 
     public void menu7() {
         try {
-
-        } catch (Exception e) { //Milyen kivétel?
-
+            System.out.println("Melyik tantárgy átlagára kíváncsi?");
+            Subject sSubject = null;
+            sSubject = sSubjectWorker();
+            System.out.println(cr.calculateClassAverageBySubject(sSubject));
+        } catch (ArithmeticException ae) {
+            throw new IllegalStateException("Hiba történt: " + ae.getMessage());
         }
     }
 
     public void menu8() {
         try {
-
-        } catch (Exception e) { //Milyen kivétel?
-
+            for (StudyResultByName sr : cr.listStudyResults()) {
+                System.out.println("A(z) " + sr.getStudentName() + " nevű tanuló átlaga: " + sr.getStudyAverage() + ".");
+            }
+        } catch (IllegalStateException ise) {
+            System.out.println("Hiba történt: " + ise.getMessage());
         }
     }
 
     public void menu9() {
         try {
-
-        } catch (Exception e) { //Milyen kivétel?
-
+            System.out.println("Melyik diák átlagára kíváncsi?");
+            String find = scanner.nextLine();
+            System.out.println(cr.findStudentByName(find).getName() + " átlaga: " + cr.findStudentByName(find).calculateAverage() + ".");
+        } catch (IllegalStateException ise) {
+            System.out.println("Hiba történt: " + ise.getMessage());
         }
     }
 
     public void menu10() {
         try {
-
-        } catch (Exception e) { //Milyen kivétel?
-
+            System.out.println("Melyik diák átlagára kíváncsi?");
+            String find = scanner.nextLine();
+            Subject sSubject = null;
+            sSubject = sSubjectWorker();
+            System.out.println(cr.findStudentByName(find).getName()
+                    + " " + sSubject.getSubjectName() + " átlaga: "
+                    + cr.findStudentByName(find).calculateSubjectAverage(sSubject) + ".");
+        } catch (NullPointerException npe) {
+            System.out.println("Hiba történt: " + npe.getMessage());
         }
     }
 
@@ -302,6 +289,29 @@ public class SchoolRecordsController {
     public void iaError(String msg) {
         System.out.println("Hiba történt. Próbálja újra. " + msg);
     }
+
+/* Ez a rész csak játékból került be, nincs a menübe implementálva már.
+   Kilistázza melyik tanár melyik tárgyat tanítjhatja és vica versa.
+    public void teachersAndSubjects() {
+        for (int i = 0; i < tutors.size(); i++) {
+            for (int j = 0; j < subjects.size(); j++) {
+                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
+                    System.out.println(tutors.get(i).getName() + " taníthat " + subjects.get(j).getSubjectName() + " tantárgyat.");
+                }
+            }
+        }
+    }
+
+    public void subjectsAndTeachers() {
+        for (int j = 0; j < subjects.size(); j++) {
+            for (int i = 0; i < tutors.size(); i++) {
+                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
+                    System.out.println("A(z) " + subjects.get(j).getSubjectName() + " tantárgyat " + tutors.get(i).getName() + " taníthatja.");
+                }
+            }
+        }
+    }
+*/
 
     public static void main(String[] args) {
 
