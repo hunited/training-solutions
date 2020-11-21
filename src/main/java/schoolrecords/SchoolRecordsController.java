@@ -24,11 +24,6 @@ public class SchoolRecordsController {
         return subjects;
     }
 
-    public SchoolRecordsController(List<Tutor> tutors, List<Subject> subjects) {
-        this.tutors = tutors;
-        this.subjects = subjects;
-    }
-
     public void initSchool() {
 
         tutors.add(new Tutor("Nagy Csilla", Arrays.asList(new Subject("matematika"), new Subject("fizika"))));
