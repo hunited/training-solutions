@@ -141,7 +141,7 @@ public class SchoolRecordsController {
         return sMarkType;
     }
 
-    public Subject sSubjectWorker(){
+    public Subject sSubjectWorker() {
         System.out.println("Tantárgy neve: ");
         for (int i = 0; i < subjects.size(); i++) {
             System.out.println("" + (i + 1) + " " + subjects.get(i).getSubjectName());
@@ -252,7 +252,11 @@ public class SchoolRecordsController {
                 System.out.println("Nem megfelelő tanár.");
             }
             whoRepetition.grading(new Mark(sMarkType, sSubject, new Tutor(sTeacher, Arrays.asList(sSubject))));
-            System.out.println("Felelet rögzítve. A diák jegyei a tantárgyban: " + whoRepetition.toString());
+            System.out.println("Felelet rögzítve: " + whoRepetition.getName() + " nevű diák "
+                    + sSubject.getSubjectName() + " tantárgyból "
+                    + sTeacher + " tanártól az alábbi osztályzatot kapta: "
+                    + sMarkType.getValue() + " Értékelése: " + sMarkType.getDescription()
+            );
         } catch (IllegalStateException ise) {
             throw new IllegalStateException(ise);
         }
