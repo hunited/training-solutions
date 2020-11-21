@@ -4,7 +4,6 @@ import java.util.*;
 
 public class SchoolRecordsController {
 
-    //public ClassRecords cr = new ClassRecords("Fourth Grade A", new Random(5));
     public ClassRecords cr;
 
     public SchoolRecordsController(ClassRecords cr) {
@@ -13,18 +12,30 @@ public class SchoolRecordsController {
 
     public Scanner scanner = new Scanner(System.in);
 
-    private Tutor tutor;
+    private List<Tutor> tutors = new ArrayList<>();
 
-    private Subject subject;
+    private List<Subject> subjects = new ArrayList<>();
+
+    public List<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public SchoolRecordsController(List<Tutor> tutors, List<Subject> subjects) {
+        this.tutors = tutors;
+        this.subjects = subjects;
+    }
 
     public void initSchool() {
-        List<Tutor> tutors = new ArrayList<>();
+
         tutors.add(new Tutor("Nagy Csilla", Arrays.asList(new Subject("matematika"), new Subject("fizika"))));
         tutors.add(new Tutor("Gipsz Jakab", Arrays.asList(new Subject("andul"), new Subject("német"))));
         tutors.add(new Tutor("Teszt Elek", Arrays.asList(new Subject("nyelvtan"), new Subject("irodalom"))));
         tutors.add(new Tutor("Min Tamás", Arrays.asList(new Subject("kémia"), new Subject("testnevelés"))));
 
-        List<Subject> subjects = new ArrayList<>();
         subjects.add(new Subject("matematika"));
         subjects.add(new Subject("fizika"));
         subjects.add(new Subject("andul"));
@@ -179,7 +190,8 @@ public class SchoolRecordsController {
 
     public void menu6() {
         try {
-
+            System.out.println(subjects);
+            System.out.println(tutors);
         } catch (Exception e) { //Milyen kivétel?
 
         }
