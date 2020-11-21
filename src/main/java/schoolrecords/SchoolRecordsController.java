@@ -225,6 +225,7 @@ public class SchoolRecordsController {
     public void menu4() {
         try {
             findStudent("törlendő ");
+            System.out.println("FIGYELEM! Kérjük a diák nevének ismételt beírásával erősítse meg törlési szándékát!");
             Student toDel = cr.findStudentByName(scanner.nextLine());
             cr.removeStudent(toDel);
             System.out.println("Sikeresen kitöröltük " + toDel.toString() + " nevét a listából.");
@@ -240,17 +241,9 @@ public class SchoolRecordsController {
             System.out.println("Kapott osztályzat: ");
             MarkType sMarkType = findMarkType(Integer.parseInt(scanner.nextLine()));
             Subject sSubject = null;
-            try {
-                sSubject = sSubjectWorker();
-            } catch (IllegalArgumentException iae) {
-                System.out.println("Nem megfelelő tantárgy.");
-            }
+            sSubject = sSubjectWorker();
             String sTeacher = null;
-            try {
-                sTeacher = sTeacherWorker(sSubject);
-            } catch (IllegalArgumentException iae) {
-                System.out.println("Nem megfelelő tanár.");
-            }
+            sTeacher = sTeacherWorker(sSubject);
             whoRepetition.grading(new Mark(sMarkType, sSubject, new Tutor(sTeacher, Arrays.asList(sSubject))));
             System.out.println("Felelet rögzítve: " + whoRepetition.getName() + " nevű diák "
                     + sSubject.getSubjectName() + " tantárgyból "
