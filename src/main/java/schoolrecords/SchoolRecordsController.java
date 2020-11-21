@@ -252,7 +252,7 @@ public class SchoolRecordsController {
                 System.out.println("Nem megfelelő tanár.");
             }
             whoRepetition.grading(new Mark(sMarkType, sSubject, new Tutor(sTeacher, Arrays.asList(sSubject))));
-            System.out.println(whoRepetition.toString());
+            System.out.println("Felelet rögzítve. A diák jegyei a tantárgyban: " + whoRepetition.toString());
         } catch (IllegalStateException ise) {
             throw new IllegalStateException(ise);
         }
