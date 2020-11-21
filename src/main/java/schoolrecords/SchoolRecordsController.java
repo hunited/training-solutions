@@ -124,21 +124,12 @@ public class SchoolRecordsController {
     }
 
     public MarkType findMarkType(int sMark) {
-        MarkType sMarkType = null;
-        if (MarkType.A.getValue() == sMark) {
-            sMarkType = MarkType.A;
-        } else if (MarkType.B.getValue() == sMark) {
-            sMarkType = MarkType.B;
-        } else if (MarkType.C.getValue() == sMark) {
-            sMarkType = MarkType.C;
-        } else if (MarkType.D.getValue() == sMark) {
-            sMarkType = MarkType.D;
-        } else if (MarkType.F.getValue() == sMark) {
-            sMarkType = MarkType.F;
-        } else {
-            throw new IllegalArgumentException("Nincs ilyen osztályzat");
+        for (MarkType markType : MarkType.values()) {
+            if (markType.getValue() == sMark) {
+                return markType;
+            }
         }
-        return sMarkType;
+        return null;
     }
 
     public Subject sSubjectWorker() {
@@ -240,6 +231,10 @@ public class SchoolRecordsController {
             System.out.println("Felel a következő diák: " + whoRepetition.getName());
             System.out.println("Kapott osztályzat: ");
             MarkType sMarkType = findMarkType(Integer.parseInt(scanner.nextLine()));
+            if (sMarkType == null) {
+                System.out.println("Hibás osztályzat, kérem javítsa!");
+                sMarkType = findMarkType(Integer.parseInt(scanner.nextLine()));
+            }
             Subject sSubject = null;
             sSubject = sSubjectWorker();
             String sTeacher = null;
@@ -251,7 +246,8 @@ public class SchoolRecordsController {
                     + sMarkType.getValue() + " Értékelése: " + sMarkType.getDescription()
             );
         } catch (IllegalStateException ise) {
-            throw new IllegalStateException(ise);
+            System.out.println("Hiba történt, kezdje újra az utolsó műveletet. " + ise.getMessage());
+            runMenu();
         }
     }
 
