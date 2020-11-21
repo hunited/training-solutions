@@ -26,19 +26,32 @@ public class SchoolRecordsController {
 
     public void initSchool() {
 
-        tutors.add(new Tutor("Nagy Csilla", Arrays.asList(new Subject("matematika"), new Subject("fizika"))));
-        tutors.add(new Tutor("Gipsz Jakab", Arrays.asList(new Subject("andul"), new Subject("német"))));
-        tutors.add(new Tutor("Teszt Elek", Arrays.asList(new Subject("nyelvtan"), new Subject("irodalom"))));
-        tutors.add(new Tutor("Min Tamás", Arrays.asList(new Subject("kémia"), new Subject("testnevelés"))));
+        Subject math = new Subject("matematika");
+        subjects.add(math);
+        Subject physics = new Subject("fizika");
+        subjects.add(physics);
+        Subject english = new Subject("angol");
+        subjects.add(english);
+        Subject german = new Subject("német");
+        subjects.add(german);
+        Subject grammar = new Subject("nyelvtan");
+        subjects.add(grammar);
+        Subject literature = new Subject("irodalom");
+        subjects.add(literature);
+        Subject chemistry = new Subject("kémia");
+        subjects.add(chemistry);
+        Subject gym = new Subject("testnevelés");
+        subjects.add(gym);
 
-        subjects.add(new Subject("matematika"));
-        subjects.add(new Subject("fizika"));
-        subjects.add(new Subject("andul"));
-        subjects.add(new Subject("német"));
-        subjects.add(new Subject("nyelvtan"));
-        subjects.add(new Subject("irodalom"));
-        subjects.add(new Subject("kémia"));
-        subjects.add(new Subject("testnevelés"));
+        Tutor csilla = new Tutor("Nagy Csilla", Arrays.asList(math, physics));
+        tutors.add(csilla);
+        Tutor jakab = new Tutor("Gipsz Jakab", Arrays.asList(english, german));
+        tutors.add(jakab);
+        Tutor elek = new Tutor("Teszt Elek", Arrays.asList(grammar, literature));
+        tutors.add(elek);
+        Tutor tamas = new Tutor("Min Tamás", Arrays.asList(chemistry, gym));
+        tutors.add(tamas);
+
     }
 
     public void startMenu() {
@@ -110,7 +123,7 @@ public class SchoolRecordsController {
         }
     }
 
-    public MarkType findMarkType(int sMark){
+    public MarkType findMarkType(int sMark) {
         MarkType sMarkType = null;
         if (MarkType.A.getValue() == sMark) {
             sMarkType = MarkType.A;
@@ -126,6 +139,60 @@ public class SchoolRecordsController {
             throw new IllegalArgumentException("Nincs ilyen osztályzat");
         }
         return sMarkType;
+    }
+
+    public Subject sSubjectWorker(){
+        System.out.println("Tantárgy neve: ");
+        for (int i = 0; i < subjects.size(); i++) {
+            System.out.println("" + (i + 1) + " " + subjects.get(i).getSubjectName());
+        }
+        int selection = Integer.parseInt(scanner.nextLine());
+        Subject sSubject = null;
+        for (int i = 0; i < subjects.size(); i++) {
+            if (selection == i + 1) {
+                sSubject = subjects.get(i);
+            }
+        }
+        return sSubject;
+    }
+
+    public String sTeacherWorker(Subject subject) {
+        System.out.println("Tanár neve: ");
+        List<String> temp = new ArrayList<>();
+        for (int i = 0; i < tutors.size(); i++) {
+            if (tutors.get(i).tutorTeachingSubject(subject)) {
+                System.out.println("" + (i + 1) + " " + tutors.get(i).getName());
+                temp.add(tutors.get(i).getName());
+            }
+        }
+        int selection = Integer.parseInt(scanner.nextLine());
+        String sTeacher = null;
+        for (int i = 0; i < temp.size(); i++) {
+            if (selection == i + 1) {
+                sTeacher = temp.get(i);
+            }
+        }
+        return sTeacher;
+    }
+
+    public void teachersAndSubjects() {
+        for (int i = 0; i < tutors.size(); i++) {
+            for (int j = 0; j < subjects.size(); j++) {
+                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
+                    System.out.println(tutors.get(i).getName() + " taníthat " + subjects.get(j).getSubjectName() + " tantárgyat.");
+                }
+            }
+        }
+    }
+
+    public void subjectsAndTeachers() {
+        for (int j = 0; j < subjects.size(); j++) {
+            for (int i = 0; i < tutors.size(); i++) {
+                if (tutors.get(i).tutorTeachingSubject(subjects.get(j))) {
+                    System.out.println("A(z) " + subjects.get(j).getSubjectName() + " tantárgyat " + tutors.get(i).getName() + " taníthatja.");
+                }
+            }
+        }
     }
 
     public void menu1() {
@@ -172,21 +239,28 @@ public class SchoolRecordsController {
             System.out.println("Felel a következő diák: " + whoRepetition.getName());
             System.out.println("Kapott osztályzat: ");
             MarkType sMarkType = findMarkType(Integer.parseInt(scanner.nextLine()));
-            System.out.println("Tantárgy neve: ");
-            Subject sSubject = new Subject(scanner.nextLine());
-            System.out.println("Tanár neve: ");
-            String sTeacher = scanner.nextLine();
+            Subject sSubject = null;
+            try {
+                sSubject = sSubjectWorker();
+            } catch (IllegalArgumentException iae) {
+                System.out.println("Nem megfelelő tantárgy.");
+            }
+            String sTeacher = null;
+            try {
+                sTeacher = sTeacherWorker(sSubject);
+            } catch (IllegalArgumentException iae) {
+                System.out.println("Nem megfelelő tanár.");
+            }
             whoRepetition.grading(new Mark(sMarkType, sSubject, new Tutor(sTeacher, Arrays.asList(sSubject))));
             System.out.println(whoRepetition.toString());
-        } catch (Exception e) { //Milyen kivétel?
-
+        } catch (IllegalStateException ise) {
+            throw new IllegalStateException(ise);
         }
     }
 
     public void menu6() {
         try {
-            System.out.println(subjects);
-            System.out.println(tutors);
+
         } catch (Exception e) { //Milyen kivétel?
 
         }
@@ -239,6 +313,7 @@ public class SchoolRecordsController {
     public static void main(String[] args) {
 
         SchoolRecordsController src = new SchoolRecordsController(new ClassRecords("Fourth Grade A", new Random(5)));
+        src.initSchool();
         src.runMenu();
 
     }
