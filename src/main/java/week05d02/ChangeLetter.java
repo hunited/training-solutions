@@ -5,16 +5,27 @@ import java.util.List;
 
 public class ChangeLetter {
 
+    private final List<Character> VOWELS = Arrays.asList('a', 'e', 'i', 'o', 'u');
+
     public String changeVowels(String string) {
-        List<Character> characters = Arrays.asList('a', 'e', 'i', 'o', 'u');
+        /* Hosszabb, ciklusokba ágyazott megoldás */
+        StringBuilder sb = new StringBuilder(string);
         for (int i = 0; i < string.length(); i++) {
-            for (int j = 0; j < characters.size(); j++) {
-                if (string.toLowerCase().charAt(i) == characters.get(j)) {
-                    string = string.replace(string.charAt(i), '*');
+            for (int j = 0; j < VOWELS.size(); j++) {
+                if (string.toLowerCase().charAt(i) == VOWELS.get(j)) {
+                    sb = sb.replace(i, i + 1, "*");
                 }
             }
         }
+        return sb.toString();
+
+        /* Egyszerűbb változat
+        List<Character> characters = Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+        for (int i = 0; i < characters.size(); i++) {
+            string = string.replaceAll(characters.get(i).toString(), "*");
+        }
         return string;
+        */
     }
 
     public static void main(String[] args) {
@@ -22,6 +33,7 @@ public class ChangeLetter {
         ChangeLetter cl = new ChangeLetter();
         String s = cl.changeVowels("Albertirsa");
         System.out.println(s);
+
     }
 
 }
