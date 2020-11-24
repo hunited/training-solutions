@@ -9,7 +9,7 @@ public class ChangeLetter {
         List<Character> characters = Arrays.asList('a', 'e', 'i', 'o', 'u');
         for (int i = 0; i < string.length(); i++) {
             for (int j = 0; j < characters.size(); j++) {
-                if (string.toLowerCase().indexOf(i) == characters.get(j)) {
+                if (string.toLowerCase().charAt(i) == characters.get(j)) {
                     string.replace(string.charAt(i), '*');
                     System.out.println(i);
                 }
