@@ -10,11 +10,7 @@ public class ChangeLetter {
         for (int i = 0; i < string.length(); i++) {
             for (int j = 0; j < characters.size(); j++) {
                 if (string.toLowerCase().charAt(i) == characters.get(j)) {
-                    string.replace(string.charAt(i), '*');
-                    System.out.println(string.charAt(i));
-                }
-                else {
-                    //System.out.println(characters.get(j) + " nem található");
+                    string = string.replace(string.charAt(i), '*');
                 }
             }
         }
