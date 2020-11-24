@@ -13,6 +13,9 @@ public class ChangeLetter {
                     string.replace(string.charAt(i), '*');
                     System.out.println(i);
                 }
+                else {
+                    System.out.println(characters.get(j) + " nem található");
+                }
             }
         }
         return string;
