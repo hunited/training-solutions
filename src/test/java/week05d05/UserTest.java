@@ -25,10 +25,8 @@ public class UserTest {
         //Exception ex = assertThrows(IllegalArgumentException.class, () -> new User("Gasparics", "Sándor", "hunited@gmailcom"));
         //assertEquals("Az e-mail cím formátuma hibás!", ex.getMessage());
 
-        /*
-        Másik fajta megjelenítése az Assertnek, több soros kiiratáshoz.
-        assertThrows-ra állva alt + Enterrel alakítható másik formátumra.
-        */
+        /* Másik fajta megjelenítése az Assertnek, több soros kiiratáshoz.
+        assertThrows-ra állva alt + Enterrel alakítható másik formátumra. */
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             new User("Gasparics", "Sándor", "hunited@gmailcom");
         });
