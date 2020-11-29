@@ -9,22 +9,17 @@ public class UserValidator {
     }
 
     public String validate(List<User> users) {
-        String iaeMessage;
         String userData = "";
         if (users == null) {
-            iaeMessage = "Nincs felhasználó a listában.";
-            error(iaeMessage);
+            error("Nincs felhasználó a listában.");
         }
         for (User user : users) {
             if (user.getAge() < 0) {
-                iaeMessage = "Hibás adat: a felhasználó életkora 0-nál kisebb!";
-                error(iaeMessage);
+                error("Hibás adat: a felhasználó életkora 0-nál kisebb!");
             } else if (user.getAge() > 120) {
-                iaeMessage = "Hibás adat: a felhasználó életkora 120-nál több!";
-                error(iaeMessage);
+                error("Hibás adat: a felhasználó életkora 120-nál több!");
             } else if (user.getName() == null || "".equals(user.getName())) {
-                iaeMessage = "Hibás adat: a felhasználó neve üres!";
-                error(iaeMessage);
+                error("Hibás adat: a felhasználó neve üres!");
             } else {
                 userData = user.toString();
             }
