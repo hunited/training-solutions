@@ -107,13 +107,15 @@ public class ClassRecords {
             throw new NullPointerException("Student must be provided!");
         }
         boolean found = false;
+        String toDel = "";
         for (Student student1 : students) {
             if (student1.getName().toLowerCase().equals(student.getName().toLowerCase())) {
                 found = true;
-                students.remove(student1);
+                toDel = student1.toString();
                 break;
             }
         }
+        students.remove(toDel);
         return found;
     }
 
