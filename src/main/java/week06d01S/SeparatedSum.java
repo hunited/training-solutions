@@ -31,9 +31,4 @@ public class SeparatedSum {
         //return String.format("%,.2f;%,.2f", negative, positive);
     }
 
-    public static void main(String[] args) {
-        SeparatedSum ss = new SeparatedSum();
-        System.out.println(ss.sum("1,2;-2,4;3,6;-4,8;6,0;-7,2;8,4"));
-    }
-
 }

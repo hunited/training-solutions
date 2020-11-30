@@ -1,5 +1,7 @@
 package week06d01S;
 
+import java.util.Locale;
+
 public class ResultPosNeg {
 
     private double negative;
@@ -19,8 +21,4 @@ public class ResultPosNeg {
         return positive;
     }
 
-    @Override
-    public String toString() {
-        return negative + ";" + positive;
-    }
 }
