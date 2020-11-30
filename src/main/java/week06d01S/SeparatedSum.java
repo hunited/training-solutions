@@ -2,6 +2,7 @@ package week06d01S;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class SeparatedSum {
@@ -13,8 +14,9 @@ public class SeparatedSum {
         }
         Scanner scanner = new Scanner(s.replace(',', '.')).useDelimiter(";");
         List<Double> input = new ArrayList<>();
+        scanner.useLocale(new Locale("en", "US"));
         while (scanner.hasNext()) {
-            input.add(Double.parseDouble(scanner.next()));
+            input.add(scanner.nextDouble());
         }
         double positive = 0.0;
         double negative = 0.0;
