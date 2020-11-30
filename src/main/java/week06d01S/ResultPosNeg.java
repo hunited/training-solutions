@@ -18,4 +18,9 @@ public class ResultPosNeg {
     public double getPositive() {
         return positive;
     }
+
+    @Override
+    public String toString() {
+        return negative + ";" + positive;
+    }
 }

@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class SeparatedSum {
 
-    //public ResultPosNeg sum(String s) {
-    public String sum(String s) {
+    public ResultPosNeg sum(String s) {
+    //public String sum(String s) {
         if (s == null) {
             throw new NullPointerException("A lista null!");
         }
@@ -25,8 +25,8 @@ public class SeparatedSum {
                 positive += output;
             }
         }
-        //return new ResultPosNeg(negative, positive);
-        return String.format("%,.2f;%,.2f", negative, positive);
+        return new ResultPosNeg(negative, positive);
+        //return String.format("%,.2f;%,.2f", negative, positive);
     }
 
     public static void main(String[] args) {
