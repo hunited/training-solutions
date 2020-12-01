@@ -1,4 +1,4 @@
-package week02d02;
+package week06d02S;
 
 public enum Category {
     FROZEN(0), DAIRY(0), BAKEDGOODS(0), OTHER(0);

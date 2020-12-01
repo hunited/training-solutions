@@ -1,4 +1,4 @@
-package week02d02;
+package week06d02S;
 
 public class Product {
 
@@ -9,8 +9,17 @@ public class Product {
     private int price;
 
     public Product(String name, Category category, int price) {
+        if (name == null || "".equals(name)) {
+            throw new NullPointerException("A termék neve nem lehet Null!");
+        }
         this.name = name;
+        if (category == null) {
+            throw new NullPointerException("A termék kategóriája nem lehet Null!");
+        }
         this.category = category;
+        if (price < 1) {
+            throw new IllegalArgumentException("A termék ára nem lehet nulla vagy kisebb!");
+        }
         this.price = price;
     }
 

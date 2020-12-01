@@ -1,7 +1,6 @@
-package week02d02;
+package week06d02S;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Store {
@@ -13,6 +12,9 @@ public class Store {
     }
 
     public String getProductsByCategory(List<Product> products) {
+        if (products == null || products.size()==0) {
+            throw new NullPointerException("A terméklista nem lehet üres!");
+        }
         String result = "";
         for (Category c : Category.values()) {
             int i = 0;
@@ -25,16 +27,6 @@ public class Store {
             result = result.concat(c.toString() + ": " + i + " db.\n");
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        Product product1 = new Product("Kenyér", Category.DAIRY, 220);
-        Product product2 = new Product("Tej", Category.DAIRY, 280);
-        Product product3 = new Product("Zsemle", Category.DAIRY, 30);
-        Product product4 = new Product("Mexikói zöldségkeverék", Category.FROZEN, 649);
-        List<Product> products = Arrays.asList(product1, product2, product3, product4);
-        Store store = new Store(products);
-        System.out.println(store.getProductsByCategory(products));
     }
 
 }
