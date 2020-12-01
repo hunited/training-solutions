@@ -5,12 +5,6 @@ import java.util.List;
 
 public class Store {
 
-    List<Product> products = new ArrayList<>();
-
-    public Store(List<Product> products) {
-        this.products = products;
-    }
-
     public String getProductsByCategory(List<Product> products) {
         if (products == null || products.size()==0) {
             throw new NullPointerException("A terméklista nem lehet üres!");
