@@ -13,7 +13,7 @@ public class WordEraser {
                 sb.append(wordList[i] + " ");
             }
         }
-        return sb.delete(sb.length() - 1, sb.length()).toString();
+        return sb.toString().trim();
     }
 
 }
