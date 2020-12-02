@@ -4,25 +4,22 @@ import java.util.List;
 
 public class Series {
 
-    private SeriesType type = SeriesType.OTHER;
-
     public SeriesType calculateSeriesType(List<Integer> nums) {
-        boolean asc = true;
-        boolean desc = true;
-        for (int i = 1; i < nums.size() && (desc || asc); ++i) {
-            if (nums.get(i - 1) < nums.get(i)) {
-                desc = false;
-            } else {
-                asc = false;
+        checkSize(nums);
+        SeriesType type = nums.get(0) < nums.get(1) ? SeriesType.ASCENDING : SeriesType.DESCENDING;
+        for (int i = 2; i < nums.size(); i++) {
+            if ((nums.get(i - 1) < nums.get(i) && type == SeriesType.DESCENDING) ||
+                    (nums.get(i - 1) > nums.get(i) && type == SeriesType.ASCENDING)) {
+                return SeriesType.OTHER;
             }
         }
-        if (asc) {
-            return SeriesType.ASCENDING;
-        }
-        if (desc) {
-            return SeriesType.DESCENDING;
-        }
         return type;
+    }
+
+    private void checkSize(List<Integer> nums) {
+        if (nums == null || nums.size() < 2) {
+            throw new IllegalArgumentException("Legalább két elem kell a listába!");
+        }
     }
 
 }
