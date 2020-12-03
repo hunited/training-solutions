@@ -30,7 +30,7 @@ public class BudgetTest {
 
     @Test
     public void tesztBudget() {
-        assertEquals("[kenyér (100 Ft), ekkor: 2020-11-05.]", new Budget(Arrays.asList(i1, i2, i3, i4, i5)).getItemsByMonth(LocalDate.of(2020, 11, 05)).toString());
+        assertEquals("[kenyér (100 Ft), ekkor: 2020-11-05.]", new Budget(Arrays.asList(i1, i2, i3, i4, i5)).getItemsByMonth(11).toString());
     }
 
     @Test

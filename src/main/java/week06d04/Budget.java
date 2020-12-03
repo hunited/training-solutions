@@ -15,10 +15,10 @@ public class Budget {
         this.items = items;
     }
 
-    public List<Item> getItemsByMonth(LocalDate date) {
+    public List<Item> getItemsByMonth(int month) {
         List<Item> filteredItems = new ArrayList<>();
         for (Item item : items) {
-            if (item.getDate().equals(date)) {
+            if (item.getDate().getMonthValue() == month) {
                 filteredItems.add(item);
             }
         }
