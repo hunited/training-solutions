@@ -12,31 +12,31 @@ public class ShoppingCart {
     }
 
     public List<Product> addItem(String name, int quantity) {
-        int temp = contain(name);
-        if (temp != -1) {
-            list.get(temp).addQuantity(quantity);
-        } else {
+        Product temp = contain(name);
+        if (temp == null) {
             list.add(new Product(name, quantity));
+        } else {
+            temp.addQuantity(quantity);
         }
         return list;
     }
 
     public int getItem(String name) {
         int q = 0;
-        if (contain(name) > -1) {
-            q = list.get(contain(name)).getQuantity();
+        if (contain(name) != null) {
+            q = contain(name).getQuantity();
         }
         return q;
     }
 
-    private int contain(String name) {
-        int pos = -1;
+    private Product contain(String name) {
+        Product found = null;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getName().equals(name)) {
-                pos = i;
+                found = list.get(i);
             }
         }
-        return pos;
+        return found;
     }
 
 }
