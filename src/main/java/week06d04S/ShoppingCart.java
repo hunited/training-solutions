@@ -14,7 +14,7 @@ public class ShoppingCart {
     public List<Product> addItem(String name, int quantity) {
         int temp = contain(name);
         if (temp != -1) {
-            list.get(temp).setQuantity(quantity);
+            list.get(temp).addQuantity(quantity);
         } else {
             list.add(new Product(name, quantity));
         }
