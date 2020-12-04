@@ -32,12 +32,4 @@ public class Bottle {
         return filledUnit;
     }
 
-    public static void main(String[] args) {
-        Bottle b = new Bottle(BottleType.GLASS_BOTTLE, 250);
-        System.out.println(b.getFilledUnit());
-        b.fill(50);
-        System.out.println(b.getFilledUnit());
-        b.fill(1);
-        System.out.println(b.getFilledUnit());
-    }
 }

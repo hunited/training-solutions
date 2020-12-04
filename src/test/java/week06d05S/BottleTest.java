@@ -26,4 +26,10 @@ public class BottleTest {
         assertEquals("Túlcsordult!", ex.getMessage());
     }
 
+    @Test
+    public void tesztBottleNoFill() {
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> new Bottle(BottleType.GLASS_BOTTLE, 0));
+        assertEquals("A mennyiség nem lehet egynél kevesebb!", ex.getMessage());
+    }
+
 }
