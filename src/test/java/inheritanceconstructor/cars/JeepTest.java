@@ -51,4 +51,11 @@ public class JeepTest {
         assertEquals(50.0, jeep.getFuel());
     }
 
+    @Test
+    public void testModifyFuelAmountToMuch() throws RuntimeException {
+        Jeep jeep = new Jeep(10.0, 30.0, 50.0, 40.0, 30.0);
+        Exception ex = assertThrows(IllegalArgumentException.class, () -> jeep.modifyFuelAmount(40.0));
+        assertEquals("Tank capacity is less than fuel!", ex.getMessage());
+    }
+
 }

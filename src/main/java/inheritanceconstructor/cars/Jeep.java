@@ -19,6 +19,9 @@ public class Jeep extends Car {
         if (extraCapacity - extraFuel >= fuel) {
             extraFuel += fuel;
         }
+        if (super.getTankCapacity() - super.getFuel() < fuel - used) {
+            throw new IllegalArgumentException("Tank capacity is less than fuel!");
+        }
         if (extraCapacity - extraFuel < fuel) {
             extraFuel += extraCapacity - extraFuel;
             fuel -= used;
