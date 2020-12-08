@@ -27,9 +27,4 @@ public class UserImpl implements User {
         return lastName;
     }
 
-    @Override
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
 }

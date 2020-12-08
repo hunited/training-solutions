@@ -2,9 +2,18 @@ package week07d02S;
 
 public interface User {
 
-    public String getUsername();
-    public String getFirstName();
-    public String getLastName();
-    public String getFullName();
+    String getUsername();
+
+    String getFirstName();
+
+    String getLastName();
+
+    default String getFullName() {
+        return getFirstName() + " " + getLastName();
+    }
+
+    static User of(String username, String firstName, String lastName) {
+        return new UserImpl(username, firstName, lastName);
+    }
 
 }
