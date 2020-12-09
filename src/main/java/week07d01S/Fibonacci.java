@@ -10,11 +10,17 @@ public class Fibonacci {
         } else if (n == 1) {
             return 1;
         }
-        return fib(n - 2) + fib(n - 1);
+        if (RESULTS[n] == null) {
+            RESULTS[n] = fib(n - 2) + fib(n - 1);
+            System.out.println(RESULTS[n]);
+        }
+        return RESULTS[n];
     }
 
+    private static final Long[] RESULTS = new Long[1024];
+
     public static void main(String[] args) {
-        System.out.println(fib(25));
+        fib(100);
     }
 
 }
