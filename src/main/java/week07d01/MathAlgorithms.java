@@ -2,7 +2,7 @@ package week07d01;
 
 public class MathAlgorithms {
 
-    public boolean isPrime(int number) {
+    public static boolean isPrime(int number) {
         if (number < 0) {
             throw new IllegalArgumentException("A szám nem lehet negatív!");
         } else if (number < 2) {

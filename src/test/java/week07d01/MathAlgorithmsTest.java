@@ -2,33 +2,28 @@ package week07d01;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MathAlgorithmsTest {
 
     @Test
     public void tesztPrim2() {
-        MathAlgorithms a = new MathAlgorithms();
-        assertEquals(true, a.isPrime(2));
+        assertTrue(MathAlgorithms.isPrime(2));
     }
 
     @Test
     public void tesztPrim1() {
-        MathAlgorithms a = new MathAlgorithms();
-        assertEquals(false, a.isPrime(1));
+        assertFalse(MathAlgorithms.isPrime(1));
     }
 
     @Test
     public void tesztPrim199() {
-        MathAlgorithms a = new MathAlgorithms();
-        assertEquals(true, a.isPrime(199));
+        assertTrue(MathAlgorithms.isPrime(199));
     }
 
     @Test
     public void tesztPrim200() {
-        MathAlgorithms a = new MathAlgorithms();
-        assertEquals(false, a.isPrime(200));
+        assertFalse(MathAlgorithms.isPrime(200));
     }
 
     @Test
