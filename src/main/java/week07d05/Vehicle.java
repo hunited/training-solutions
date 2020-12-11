@@ -2,8 +2,8 @@ package week07d05;
 
 public class Vehicle {
 
-    private int numberOfGears = 5;
-    private TransmissionType transmissionType = TransmissionType.MANUAL;
+    private int numberOfGears;
+    private TransmissionType transmissionType;
 
     public Vehicle(int numberOfGears, TransmissionType transmissionType) {
         this.numberOfGears = numberOfGears;
@@ -11,12 +11,11 @@ public class Vehicle {
     }
 
     public Vehicle() {
-        numberOfGears = 5;
-        transmissionType = TransmissionType.MANUAL;
+        this(5, TransmissionType.MANUAL);
     }
 
     public Vehicle(TransmissionType transmissionType) {
-        this.transmissionType = transmissionType;
+        this(5, transmissionType);
     }
 
     public int getNumberOfGears() {
