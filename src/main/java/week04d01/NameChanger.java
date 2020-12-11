@@ -1,4 +1,4 @@
-package week04;
+package week04d01;
 
 public class NameChanger {
 

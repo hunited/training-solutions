@@ -1,4 +1,4 @@
-package week03;
+package week03d04;
 
 import org.junit.jupiter.api.Test;
 

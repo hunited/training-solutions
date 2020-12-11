@@ -1,9 +1,9 @@
-package week04;
+package week04d02;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharOperations {
+public class Search {
 
     public List<Integer> getPositionOfChar(String base, String part) {
         List<Integer> indexes = new ArrayList<>();
