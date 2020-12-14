@@ -42,19 +42,16 @@ public class Catalog {
     public List<CatalogItem> findByCriteria(SearchCriteria searchCriteria) {
         List<CatalogItem> items = new ArrayList<>();
         for (CatalogItem catalogItem : catalogItems) {
-            List<String> contributors = catalogItem.getContributors();
-            List<String> titles = catalogItem.getTitles();
-            if (contributors.contains(searchCriteria.getContributor()) && titles.contains(searchCriteria.getTitle())) {
-                items.add(catalogItem);
-            }
-            if (!searchCriteria.hasTitle() && contributors.contains(searchCriteria.getContributor())) {
-                items.add(catalogItem);
-            }
-            if (!searchCriteria.hasContributor() && titles.contains(searchCriteria.getTitle())) {
+            if (hasTitleOrContributor(catalogItem, searchCriteria)) {
                 items.add(catalogItem);
             }
         }
         return items;
+    }
+
+    private boolean hasTitleOrContributor(CatalogItem catalogItem, SearchCriteria searchCriteria) {
+        return catalogItem.getContributors().contains(searchCriteria.getContributor())
+                || catalogItem.getTitles().contains(searchCriteria.getTitle());
     }
 
     public int getAllPageNumber() {
