@@ -1,0 +1,47 @@
+package week05.d05S;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Playlist {
+
+    List<Song> songs;
+
+    public Playlist(List<Song> songs) {
+        if (songs == null || songs.isEmpty()) {
+            throw new IllegalArgumentException("A lejátszási lista üres!");
+        }
+        this.songs = songs;
+    }
+
+    public List<Song> findByLengthGreaterThan(int mins) {
+        final int MIN = 60;
+        List<Song> found = new ArrayList<>();
+        for (Song song : songs) {
+            if ((song.getLengthInSeconds() / MIN) >= mins) {
+                found.add(song);
+            }
+        }
+        if (found.isEmpty()) {
+            throw new NullPointerException("Nincs ilyen hosszú szám!");
+        }
+        return found;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    @Override
+    public String toString() {
+        String msg = "";
+        for (int i = 0; i < songs.size(); i++) {
+            msg = msg.concat(songs.get(i).toString());
+            if (i != songs.size() - 1) {
+                msg = msg.concat("\n");
+            }
+        }
+        return msg;
+    }
+
+}

@@ -1,7 +1,5 @@
 package methodchain.robot;
 
-import week06d02.Product;
-
 import java.util.ArrayList;
 import java.util.List;
 
