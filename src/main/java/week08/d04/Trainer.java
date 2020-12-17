@@ -19,5 +19,4 @@ public class Trainer {
         System.out.println(t2.giveMark());
     }
 
-
 }
