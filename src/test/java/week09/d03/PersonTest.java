@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.jar.Manifest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,23 +23,23 @@ class PersonTest {
     }
 
     @Test
-    public void testPresent() {
+    void testPresent() {
         String result = "Karácsonyi ajándékok: [Anita(36) ajándéka: Electronic, Emese(8) ajándéka: Toy, Sanyi(40) ajándéka: Electronic, Hunor(10) ajándéka: Toy].";
         assertEquals(result, sc.toString());
     }
 
     @Test
-    public void testPresentName() {
+    void testPresentName() {
         assertEquals("Anita", sc.getPersonList().get(0).getName());
     }
 
     @Test
-    public void testPresentAge() {
+    void testPresentAge() {
         assertEquals(36, sc.getPersonList().get(0).getAge());
     }
 
     @Test
-    public void testPresentType() {
+    void testPresentType() {
         assertEquals(Present.Electronic, sc.getPersonList().get(0).getPresent());
     }
 

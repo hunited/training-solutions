@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Person {
 
-    private String name;
-    private int age;
+    private final String name;
+    private final int age;
     private Present present;
 
     public Person(String name, int age) {
