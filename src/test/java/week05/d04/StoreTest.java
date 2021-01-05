@@ -32,7 +32,7 @@ public class StoreTest {
         Product p2 = new Product("Körte", 2020, 12, 28);
         Product p3 = new Product("Szőlő", 2020, 11, 28);
         Product p4 = new Product("Cseresznye", 2021, 11, 28);
-        assertEquals(2, s.getNumberOfExpired(Arrays.asList(p1, p2, p3, p4)));
+        assertEquals(3, s.getNumberOfExpired(Arrays.asList(p1, p2, p3, p4)));
     }
 
     @Test
