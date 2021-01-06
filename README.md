@@ -3,6 +3,9 @@
 
 ## Tematika
 
+### Vizsga feladatok
+* [exam02](src/main/java/exam02/) - 2. vizsga: Gyakorlati rész
+
 ### Projekt feladatok
 * [week02](src/main/java/week02/) - 1. projekt: MeetingRoom
 * [schoolrecords](src/main/java/schoolrecords/) - 2. projekt: Schoolrecords
