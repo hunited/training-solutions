@@ -168,7 +168,11 @@ Kivételkezelés
 Fájlkezelés
 
 * [ioreadstring](src/main/java/ioreadstring/) - Szöveges állomány beolvasása
-  ====
+  
+
+Itt tartok:
+
+
 * iowritestring - String kiírása szöveges állományba
 * ioreadwritebytes - Bájtos beolvasása fájlból és kiírása fájlba
 * ioreader - String olvasása Readerrel
