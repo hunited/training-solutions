@@ -10,14 +10,14 @@
 
 ### Napi feladatok
 * [week02](src/main/java/week02/) - 02. hét feladatai
-* [week02](src/main/java/week03/) - 03. hét feladatai
-* [week02](src/main/java/week04/) - 04. hét feladatai
-* [week02](src/main/java/week05/) - 05. hét feladatai
-* [week02](src/main/java/week06/) - 06. hét feladatai
-* [week02](src/main/java/week07/) - 07. hét feladatai
-* [week02](src/main/java/week08/) - 08. hét feladatai
-* [week02](src/main/java/week09/) - 09. hét feladatai
-* [week02](src/main/java/week10/) - 10. hét feladatai
+* [week03](src/main/java/week03/) - 03. hét feladatai
+* [week04](src/main/java/week04/) - 04. hét feladatai
+* [week05](src/main/java/week05/) - 05. hét feladatai
+* [week06](src/main/java/week06/) - 06. hét feladatai
+* [week07](src/main/java/week07/) - 07. hét feladatai
+* [week08](src/main/java/week08/) - 08. hét feladatai
+* [week09](src/main/java/week09/) - 09. hét feladatai
+* [week10](src/main/java/week10/) - 10. hét feladatai
 
 
 ### Bevezetés a nyelvi eszközökbe
