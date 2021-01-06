@@ -18,7 +18,7 @@ Eszközkészlet
 
 Java osztályok
 
-* [classstructureio](../src/main/java/classstructureio/) - Kiírás és beolvasás konzolról
+* [classstructureio](/src/main/java/classstructureio/) - Kiírás és beolvasás konzolról
 * classstructureattributes - Objektumok és attribútumok
 * classstructuremethods - Metódusok
 * classstructureconstructors - Konstruktorok
