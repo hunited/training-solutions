@@ -3,6 +3,23 @@
 
 ## Tematika
 
+### Projekt feladatok
+* [week02](src/main/java/week02/) - 1. projekt: MeetingRoom
+* [schoolrecords](src/main/java/schoolrecords/) - 2. projekt: Schoolrecords
+* [catalog](src/main/java/catalog/) - 3. projekt: Catalog
+
+### Napi feladatok
+* [week02](src/main/java/week02/) - 02. hét feladatai
+* [week02](src/main/java/week03/) - 03. hét feladatai
+* [week02](src/main/java/week04/) - 04. hét feladatai
+* [week02](src/main/java/week05/) - 05. hét feladatai
+* [week02](src/main/java/week06/) - 06. hét feladatai
+* [week02](src/main/java/week07/) - 07. hét feladatai
+* [week02](src/main/java/week08/) - 08. hét feladatai
+* [week02](src/main/java/week09/) - 09. hét feladatai
+* [week02](src/main/java/week10/) - 10. hét feladatai
+
+
 ### Bevezetés a nyelvi eszközökbe
 
 Eszközkészlet
@@ -18,139 +35,140 @@ Eszközkészlet
 
 Java osztályok
 
-* [classstructureio](tree/src/main/java/classstructureio/) - Kiírás és beolvasás konzolról
-* classstructureattributes - Objektumok és attribútumok
-* classstructuremethods - Metódusok
-* classstructureconstructors - Konstruktorok
-* classstructureintegrate - UML, példányok konzol íráskor/olvasáskor
+* [classstructureio](src/main/java/classstructureio/) - Kiírás és beolvasás konzolról
+* [classstructureattributes](src/main/java/classstructureattributes/) - Objektumok és attribútumok
+* [classstructuremethods](src/main/java/classstructuremethods/) - Metódusok
+* [classstructureconstructors](src/main/java/classstructureconstructors/) - Konstruktorok
+* [classstructureintegrate](src/main/java/classstructureintegrate/) - UML, példányok konzol íráskor/olvasáskor
 
 A nyelv építőkövei
 
 * ~~conventions - Kódolási konvenciók~~
-* localvariables - Literálok és lokális változók
-* statements - Kifejezések és utasítások
-* packages - Csomagok
-* javaapi - Java API
+* [localvariables](src/main/java/localvariables/) - Literálok és lokális változók
+* [statements](src/main/java/statements/) - Kifejezések és utasítások
+* [packages](src/main/java/packages/) - Csomagok
+* [javaapi](src/main/java/javaapi/) - Java API
 * ~~distjar - JAR állomány~~
-* stringtype - Szöveges típus
-* introdate - Dátum és időkezelés alapok
-* introcontrol - Bevezetés a vezérlési szerkezetekbe
+* [stringtype](src/main/java/stringtype/) - Szöveges típus
+* [introdate](src/main/java/introdate/) - Dátum és időkezelés alapok
+* [introcontrol](src/main/java/introcontrol/) - Bevezetés a vezérlési szerkezetekbe
 
 Bonyolultabb típusok
 
-* array - Tömbök
-* cmdarguments - Parancssori paraméterek
-* arrayofarrays - Tömbök tömbje
-* arrays - Tömbök kezelése
-* arraylist - Lista
-* debug - Debug
-* finalmodifier - Konstans értékek használata
-* math - Math és Random osztály
+* [array](src/main/java/array/) - Tömbök
+* ~~cmdarguments - Parancssori paraméterek~~
+* [arrayofarrays](src/main/java/arrayofarrays/) - Tömbök tömbje
+* [arrays](src/main/java/arrays/) - Tömbök kezelése
+* [arraylist](src/main/java/arraylist/) - Lista
+* [debug](src/main/java/debug/) - Debug
+* [finalmodifier](src/main/java/finalmodifier/) - Konstans értékek használata
+* [math](src/main/java/math/) - Math és Random osztály
 
 Bevezetés az osztályok és objektumok világába
 
-* objects - Objektumok
-* attributes - Bevezetés az attribútumok használatába
-* introconstructors - Bevezetés a konstruktorok használatába
-* intromethods - Bevezetés a metódusok használatába
-* references - Referenciák
+* [objects](src/main/java/objects/) - Objektumok
+* [attributes](src/main/java/attributes/) - Bevezetés az attribútumok használatába
+* [introconstructors](src/main/java/introconstructors/) - Bevezetés a konstruktorok használatába
+* [intromethods](src/main/java/intromethods/) - Bevezetés a metódusok használatába
+* [references](src/main/java/references/) - Referenciák
 
 ### A Java nyelv részletes megismerése
 
 Típusok és operátorok
 
-* literals - Literálok
-* primitivetypes - Egyszerű típusok
-* enumtype - Felsorolásos típus
-* operators - Operátorok
-* typeconversion - Típuskonverzió
-* numbers - Egész és lebegőpontos számok
+* [literals](src/main/java/literals/) - Literálok
+* [primitivetypes](src/main/java/primitivetypes/) - Egyszerű típusok
+* [enumtype](src/main/java/enumtype/) - Felsorolásos típus
+* [operators](src/main/java/operators/) - Operátorok
+* [typeconversion](src/main/java/typeconversion/) - Típuskonverzió
+* [numbers](src/main/java/numbers/) - Egész és lebegőpontos számok
 
 Vezérlési szerkezetek
 
-* introjunit - Unit tesztelés JUnittal
-* junit5 - JUnit 5
-* controlselection - Vezérlési szerkezetek és az elágazás
-* controliteration - Ciklusok
-* controladvanced - Haladó vezérlési szerkezetek
-* introexception - Bevezetés a kivételkezelésbe
+* [introjunit](src/main/java/introjunit/) - Unit tesztelés JUnittal
+* ~~junit5 - JUnit 5~~
+* [controlselection](src/main/java/controlselection/) - Vezérlési szerkezetek és az elágazás
+* [controliteration](src/main/java/controliteration/) - Ciklusok
+* [controladvanced](src/main/java/controladvanced/) - Haladó vezérlési szerkezetek
+* [introexception](src/main/java/introexception/) - Bevezetés a kivételkezelésbe
 
 String, StringBuilder
 
-* stringbasic - String alapok
-* stringconcat - Konkatenáció
-* stringmethods - Főbb String metódusok
-* stringbuilder - StringBuilder
-* stringscanner - Scanner
-* filescanner - Fájl olvasása Scannerrel
-* formatlocaleprintf - printf
+* [stringbasic](src/main/java/stringbasic/) - String alapok
+* [stringconcat](src/main/java/stringconcat/) - Konkatenáció
+* [stringmethods](src/main/java/stringmethods/) - Főbb String metódusok
+* [stringbuilder](src/main/java/stringbuilder/) - StringBuilder
+* [stringscanner](src/main/java/stringscanner/) - Scanner
+* [filescanner](src/main/java/filescanner/) - Fájl olvasása Scannerrel
+* [formatlocaleprintf](src/main/java/formatlocaleprintf/) - printf
 
 Programozási tételek és egyéb algoritmusok
 
-* algorithmssum - Összegzés tétele
-* algorithmscount - Számlálás tétele
-* algorithmsmax - Szélsőérték keresés tétele
-* algorithmsdecision - Eldöntés tétele
-* recursion - Rekurzió
+* [algorithmssum](src/main/java/algorithmssum/) - Összegzés tétele
+* [algorithmscount](src/main/java/algorithmscount/) - Számlálás tétele
+* [algorithmsmax](src/main/java/algorithmsmax/) - Szélsőérték keresés tétele
+* [algorithmsdecision](src/main/java/algorithmsdecision/) - Eldöntés tétele
+* [recursion](src/main/java/recursion/) - Rekurzió
 
 ### Objektumorientáltság
 
 Attribútumok és metódusok
 
-* immutable - Immutable objektumok
-* javabeans - JavaBeans objektumok
-* methodstructure - Metódusok
-* methodpass - Értékmásolás szerinti paraméterátadás
-* methodparam - Metódus paraméterek
-* methodvarargs - Változó hosszúságú paraméterlista
-* methodchain - Metódus hívások láncolása
-* methoverloading - Metódusnév túlterhelés
-* staticattrmeth - Statikus attribútumok és metódusok
+* [immutable](src/main/java/immutable/) - Immutable objektumok
+* [javabeans](src/main/java/javabeans/) - JavaBeans objektumok
+* [methodstructure](src/main/java/methodstructure/) - Metódusok
+* [methodpass](src/main/java/methodpass/) - Értékmásolás szerinti paraméterátadás
+* [methodparam](src/main/java/methodparam/) - Metódus paraméterek
+* [methodvarargs](src/main/java/methodvarargs/) - Változó hosszúságú paraméterlista
+* [methodchain](src/main/java/methodchain/) - Metódus hívások láncolása
+* [methoverloading](src/main/java/methodoverloading/) - Metódusnév túlterhelés
+* [staticattrmeth](src/main/java/staticattrmeth/) - Statikus attribútumok és metódusok
 
 Konstruktorok és inicializátorok
 
-* defaultconstructor - Default és paraméter nélküli konstruktor
-* constructoroverloading - Konstruktor túlterhelés
-* initializer - Inicializátorok
+* [defaultconstructor](src/main/java/defaultconstructor/) - Default és paraméter nélküli konstruktor
+* [constructoroverloading](src/main/java/constructoroverloading/) - Konstruktor túlterhelés
+* [initializer](src/main/java/initializer/) - Inicializátorok
 
 Öröklődés
 
-* introinheritance - Öröklődés
-* inheritanceconstructor - Konstruktorok és az öröklődés viszonya
-* objectclass - Object ősosztály
-* inheritanceattributes - Attribútumok öröklődése
-* inheritancemethods - Metódusok öröklődése
+* [introinheritance](src/main/java/introinheritance/) - Öröklődés
+* [inheritanceconstructor](src/main/java/inheritanceconstructor/) - Konstruktorok és az öröklődés viszonya
+* [objectclass](src/main/java/objectclass/) - Object ősosztály
+* [inheritanceattributes](src/main/java/inheritanceattributes/) - Attribútumok öröklődése
+* [inheritancemethods](src/main/java/inheritancemethods/) - Metódusok öröklődése
 
 Absztrakt osztályok és interfészek
 
-* abstractclass - Absztrakt osztályok
-* interfaces - Interfészek
-* interfacerules - Interfészekkel kapcsolatos szabályok
-* interfacedependencyinversion - Dependency inversion
-* interfacedefaultmethods - Default interfész metódusok
-* interfacestaticmethods - Statikus interfész metódusok
-* interfaceextends - Interfészek és az öröklődés viszonya
-* enumabstract - Absztrakt metódusok implementálása felsorolásos típusokban
-* statemachine - Állapotgép
+* [abstractclass](src/main/java/abstractclass/) - Absztrakt osztályok
+* [interfaces](src/main/java/interfaces/) - Interfészek
+* ~~interfacerules - Interfészekkel kapcsolatos szabályok~~
+* ~~interfacedependencyinversion - Dependency inversion~~
+* [interfacedefaultmethods](src/main/java/interfacedefaultmethods/) - Default interfész metódusok
+* [interfacestaticmethods](src/main/java/interfacestaticmethods/) - Statikus interfész metódusok
+* [interfaceextends](src/main/java/interfaceextends/) - Interfészek és az öröklődés viszonya
+* [enumabstract](src/main/java/enumabstract/) - Absztrakt metódusok implementálása felsorolásos típusokban
+* [statemachine](src/main/java/statemachine/) - Állapotgép
 
 Haladó OO elvek
 
-* polymorphism - Polimorfizmus
-* virtualmethod - Dinamikus kötés
-* isahasa - is-a has-a kapcsolatok
+* ~~polymorphism - Polimorfizmus~~
+* [virtualmethod](src/main/java/virtualmethod/) - Dinamikus kötés
+* [isahasa](src/main/java/isahasa/) - is-a has-a kapcsolatok
 
 ### Kivétel- és fájlkezelés
 
 Kivételkezelés
 
-* exceptions - Kivételkezelés
-* exceptionclass - Saját kivétel
-* exceptionmulticatch - Multi catch
-* exceptionresource - Try-With-Resources szerkezet
+* [exceptions](src/main/java/exceptions/) - Kivételkezelés
+* [exceptionclass](src/main/java/exceptionclass/) - Saját kivétel
+* [exceptionmulticatch](src/main/java/exceptionmulticatch/) - Multi catch
+* ~~exceptionresource - Try-With-Resources szerkezet~~
 
 Fájlkezelés
 
-* ioreadstring - Szöveges állomány beolvasása
+* [ioreadstring](src/main/java/ioreadstring/) - Szöveges állomány beolvasása
+  ====
 * iowritestring - String kiírása szöveges állományba
 * ioreadwritebytes - Bájtos beolvasása fájlból és kiírása fájlba
 * ioreader - String olvasása Readerrel
