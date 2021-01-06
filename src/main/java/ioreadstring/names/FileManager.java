@@ -9,8 +9,8 @@ import java.util.List;
 
 public class FileManager {
 
-    private Path myFile;
-    private List<Human> humans = new ArrayList<>();
+    private final Path myFile;
+    private final List<Human> humans = new ArrayList<>();
 
     public FileManager(String path) {
         this.myFile = Path.of(path);
