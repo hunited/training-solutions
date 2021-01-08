@@ -18,10 +18,10 @@ class CalculatorTest {
     @Test
     void testCalculatorToSmallList() {
 
-        Exception ex1 = assertThrows(ArrayIndexOutOfBoundsException.class, () -> new Calculator().findMinSum(new int[]{1, 9, 7}));
-        assertEquals("Túl kicsi a lista", ex1.getMessage());
+        Exception ex1 = assertThrows(IllegalArgumentException.class, () -> new Calculator().findMinSum(new int[]{1, 9, 7}));
+        assertEquals("Túl kicsi a lista!", ex1.getMessage());
 
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> new Calculator().findMinSum(new int[]{}));
+        assertThrows(IllegalArgumentException.class, () -> new Calculator().findMinSum(new int[]{}));
 
     }
 

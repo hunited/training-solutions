@@ -6,7 +6,7 @@ public class Calculator {
 
     public int findMinSum(int[] arr) {
         if (arr.length < 4) {
-            throw new ArrayIndexOutOfBoundsException("Túl kicsi a lista");
+            throw new IllegalArgumentException("Túl kicsi a lista!");
         }
         Arrays.sort(arr);
         int sum = 0;
