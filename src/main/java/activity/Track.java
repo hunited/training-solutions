@@ -1,12 +1,15 @@
 package activity;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Track {
 
-    private List<TrackPoint> trackPoints = new ArrayList<>();
+    private final List<TrackPoint> trackPoints = new ArrayList<>();
 
     public void addTrackPoint(TrackPoint trackPoint) {
         trackPoints.add(trackPoint);
@@ -85,11 +88,28 @@ public class Track {
     }
 
     public void loadFromGpx(InputStream is) {
-        //Fájlbeolvasás, LoadFileTest teszteseteihez
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+            String trkpt;
+            String ele;
+            double latitude;
+            double longitude;
+            double elevation;
+            while ((trkpt = reader.readLine()) != null) {
+                if (trkpt.contains("<trkpt")) {
+                    latitude = Double.parseDouble(trkpt.substring(15, 25));
+                    longitude = Double.parseDouble(trkpt.substring(32, 42));
+                    ele = reader.readLine();
+                    elevation = Double.parseDouble(ele.substring(9, 14));
+                    trackPoints.add(new TrackPoint(new Coordinate(latitude, longitude), elevation));
+                }
+            }
+        } catch (IOException ioe) {
+            throw new IllegalStateException("Can not read file", ioe);
+        }
     }
 
     private void emptyListError() {
-        if (trackPoints == null || trackPoints.isEmpty()) {
+        if (trackPoints.isEmpty()) {
             throw new NullPointerException("Empty List");
         }
     }

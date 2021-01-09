@@ -17,8 +17,9 @@ public class Activities {
 
     public List<Report> distancesByTypes() {
         List<Report> reports = new ArrayList<>();
+        ActivityType activityType;
         for (int i = 0; i < ActivityType.values().length; i++) {
-            ActivityType activityType = ActivityType.values()[i];
+            activityType = ActivityType.values()[i];
             double distance = 0;
             for (Activity activity : activities) {
                 if (activity.getType().equals(ActivityType.values()[i])) {
