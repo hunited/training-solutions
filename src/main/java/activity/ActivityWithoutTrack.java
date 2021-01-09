@@ -2,7 +2,7 @@ package activity;
 
 public class ActivityWithoutTrack implements Activity {
 
-    private ActivityType activityType;
+    private final ActivityType activityType;
 
     public ActivityWithoutTrack(ActivityType activityType) {
         this.activityType = activityType;
@@ -15,7 +15,7 @@ public class ActivityWithoutTrack implements Activity {
 
     @Override
     public ActivityType getType() {
-        return null;
+        return activityType;
     }
 
 }
