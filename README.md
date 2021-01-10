@@ -172,12 +172,8 @@ Kivételkezelés
 Fájlkezelés
 
 * [ioreadstring](src/main/java/ioreadstring/) - Szöveges állomány beolvasása
-  
-
-Itt tartok:
-
-
-* iowritestring - String kiírása szöveges állományba
+* [iowritestring](src/main/java/iowritestring/) - String kiírása szöveges állományba
+  Itt tartok:
 * ioreadwritebytes - Bájtos beolvasása fájlból és kiírása fájlba
 * ioreader - String olvasása Readerrel
 * iowriter - String írása Writerrel
