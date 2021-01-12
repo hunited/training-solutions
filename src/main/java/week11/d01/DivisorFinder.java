@@ -7,9 +7,9 @@ public class DivisorFinder {
         int result = 0;
         for (char c : temp) {
             int number;
-            try {
-                number = Integer.parseInt(String.valueOf(c));
-            } catch (NumberFormatException nfe) {
+            if (c != '-') {
+                number = Character.getNumericValue(c);
+            } else {
                 continue;
             }
             if (n % number == 0) {
