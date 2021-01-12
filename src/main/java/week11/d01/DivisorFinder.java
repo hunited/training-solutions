@@ -7,7 +7,7 @@ public class DivisorFinder {
         int result = 0;
         for (char c : temp) {
             int number;
-            if (c != '-') {
+            if (c != '-' && c != '0') {
                 number = Character.getNumericValue(c);
             } else {
                 continue;
