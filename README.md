@@ -7,7 +7,7 @@
 * [exam02](src/main/java/exam02/) - 2. vizsga: Gyakorlati rész
 
 ### Projekt feladatok
-* [week02](src/main/java/week02/) - 1. projekt: MeetingRoom
+* [meetingrooms](src/main/java/meetingrooms/) - 1. projekt: MeetingRoom
 * [schoolrecords](src/main/java/schoolrecords/) - 2. projekt: Schoolrecords
 * [catalog](src/main/java/catalog/) - 3. projekt: Catalog
 * [activity](src/main/java/activity/) - 4. projekt: Activity
