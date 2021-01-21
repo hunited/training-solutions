@@ -1,6 +1,6 @@
-package methodoverloading.pub;
+package methoverloading.pub;
 
-import methodoverloading.Time;
+import methoverloading.Time;
 
 public class Pub {
 
