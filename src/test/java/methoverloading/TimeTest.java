@@ -1,4 +1,4 @@
-package methodoverloading;
+package methoverloading;
 
 import org.junit.jupiter.api.Test;
 
