@@ -176,9 +176,9 @@ Fájlkezelés
 * [ioreadstring](src/main/java/ioreadstring/) - Szöveges állomány beolvasása
 * [iowritestring](src/main/java/iowritestring/) - String kiírása szöveges állományba
 * [ioreadwritebytes](src/main/java/ioreadwritebytes/) - Bájtos beolvasása fájlból és kiírása fájlba 
-  
+* [ioreader](src/main/java/ioreader/) - String olvasása Readerrel
+
 Itt tartok:
-* ioreader - String olvasása Readerrel
 * iowriter - String írása Writerrel
 * ioprintwriter - Különböző típusok írása PrintWriterrel
 * iostringwriter - Kiírás Stringbe StringWriterrel
