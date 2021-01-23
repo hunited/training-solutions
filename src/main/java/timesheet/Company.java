@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Company {
 
@@ -33,7 +32,7 @@ public class Company {
         foundEmployee(employeeName);
         Map<String, Integer> pairs = new HashMap<>();
         List<ReportLine> reportLines = getReports(pairs);
-        for (TimeSheetItem timeSheetItem : getTimeSheetItems(employeeName, year, month)) {
+        for (TimeSheetItem timeSheetItem : getFilteredTimeSheets(employeeName, year, month)) {
             String pName = timeSheetItem.getProject().getName();
             reportLines.get(pairs.get(pName)).addTime(timeSheetItem.hoursBetweenDates());
         }
@@ -99,14 +98,16 @@ public class Company {
         return reportLines;
     }
 
-    private List<TimeSheetItem> getTimeSheetItems(String employeeName, int year, int month) {
-        List<TimeSheetItem> filter;
-        filter = timeSheetItems.stream().filter(timeSheetItem ->
-                timeSheetItem.getEmployee().getName().equals(employeeName) &&
-                        timeSheetItem.getBeginDate().getYear() == year &&
-                        timeSheetItem.getBeginDate().getMonthValue() == month).collect(Collectors.toList()
-        );
-        return filter;
+    private List<TimeSheetItem> getFilteredTimeSheets(String employeeName, int year, int month) {
+        List<TimeSheetItem> filteredTimeSheets = new ArrayList<>();
+        for(TimeSheetItem timeSheetItem : timeSheetItems){
+            if( timeSheetItem.getEmployee().getName().equals(employeeName) &&
+                    timeSheetItem.getBeginDate().getYear() == year &&
+                    timeSheetItem.getBeginDate().getMonthValue() == month){
+                filteredTimeSheets.add(timeSheetItem);
+            }
+        }
+        return filteredTimeSheets;
     }
 
     private void fileWriter(Path file, StringBuilder printLine) {
