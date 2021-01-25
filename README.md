@@ -182,9 +182,9 @@ Fájlkezelés
 * [iowriter](src/main/java/iowriter/) - String írása Writerrel
 * [ioprintwriter](src/main/java/ioprintwriter/) - Különböző típusok írása PrintWriterrel
 * [iostringwriter](src/main/java/iostringwriter/) - Kiírás Stringbe StringWriterrel
+* [ioreadbytes](src/main/java/ioreadbytes/) - Bájtok olvasása InputStreammel
 
   Itt tartok:
-* ioreadbytes - Bájtok olvasása InputStreammel
 * ioreaderclasspath - String olvasása classpath-ról
 * iowritebytes - Bájtok írása OutputStreammel
 * iodatastream - Adatok írása OutputStreamre, és olvasás
