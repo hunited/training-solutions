@@ -11,7 +11,7 @@ public class ByteChecker {
         int result = 0;
         try (InputStream inputStream = Files.newInputStream(file)) {
             byte[] buffer = new byte[1000];
-            int size = 0;
+            int size;
             while ((size = inputStream.read(buffer)) > 0) {
                 for (int i = 0; i < size; i++) {
                     if (buffer[i] == (byte) 'a') {
