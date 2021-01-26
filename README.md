@@ -129,7 +129,7 @@ Attribútumok és metódusok
 * [methodparam](src/main/java/methodparam/) - Metódus paraméterek
 * [methodvarargs](src/main/java/methodvarargs/) - Változó hosszúságú paraméterlista
 * [methodchain](src/main/java/methodchain/) - Metódus hívások láncolása
-* [methoverloading](src/main/java/methoverloading/) - Metódusnév túlterhelés
+* [methodoverloading](src/main/java/methodoverloading/) - Metódusnév túlterhelés
 * [staticattrmeth](src/main/java/staticattrmeth/) - Statikus attribútumok és metódusok
 
 Konstruktorok és inicializátorok
