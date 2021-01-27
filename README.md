@@ -184,9 +184,9 @@ Fájlkezelés
 * [iostringwriter](src/main/java/iostringwriter/) - Kiírás Stringbe StringWriterrel
 * [ioreadbytes](src/main/java/ioreadbytes/) - Bájtok olvasása InputStreammel
 * [ioreaderclasspath](src/main/java/ioreaderclasspath/) - String olvasása classpath-ról
+* [iowritebytes](src/main/java/iowritebytes/) - Bájtok írása OutputStreammel
 
   Itt tartok:
-* iowritebytes - Bájtok írása OutputStreammel
 * iodatastream - Adatok írása OutputStreamre, és olvasás
 * iozip - Bájtok írása tömörítéssel
 * ioconvert - Konvertálás a típusok között
