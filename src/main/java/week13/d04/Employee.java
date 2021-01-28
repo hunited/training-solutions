@@ -18,9 +18,4 @@ public class Employee {
         return yearOfBirth;
     }
 
-    @Override
-    public String toString() {
-        return "Az alkalmazott neve: " + getName() + " születési éve: " + getYearOfBirth();
-    }
-
 }
