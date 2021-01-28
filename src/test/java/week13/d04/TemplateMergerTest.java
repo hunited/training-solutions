@@ -26,4 +26,9 @@ class TemplateMergerTest {
         assertEquals(asserted, employees);
     }
 
+    @Test
+    void testTemplateMergerEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> tm.merge(Path.of(file), List.of()));
+    }
+
 }
