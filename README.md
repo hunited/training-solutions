@@ -188,9 +188,9 @@ Fájlkezelés
 * [iowritebytes](src/main/java/iowritebytes/) - Bájtok írása OutputStreammel
 * [iodatastream](src/main/java/iodatastream/) - Adatok írása OutputStreamre, és olvasás
 * [iozip](src/main/java/iozip/) - Bájtok írása tömörítéssel
+* [ioconvert](src/main/java/ioconvert/) - Konvertálás a típusok között
 
   Itt tartok:
-* ioconvert - Konvertálás a típusok között
 * iofiles - Files osztály használata
 * iofilestest - Fájlkezelés tesztelése
 
