@@ -9,6 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class TransactionFileManager {
+
     public void saveTransactions(Path path, List<Transaction> transactions) {
         try (ZipOutputStream os = new ZipOutputStream(new BufferedOutputStream(Files.newOutputStream(path)))) {
             for (Transaction transaction : transactions) {
@@ -20,4 +21,5 @@ public class TransactionFileManager {
             throw new IllegalStateException("Can not write file", ioe);
         }
     }
+
 }
