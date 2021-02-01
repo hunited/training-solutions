@@ -187,9 +187,9 @@ Fájlkezelés
 * [ioreaderclasspath](src/main/java/ioreaderclasspath/) - String olvasása classpath-ról
 * [iowritebytes](src/main/java/iowritebytes/) - Bájtok írása OutputStreammel
 * [iodatastream](src/main/java/iodatastream/) - Adatok írása OutputStreamre, és olvasás
+* [iozip](src/main/java/iozip/) - Bájtok írása tömörítéssel
 
   Itt tartok:
-* iozip - Bájtok írása tömörítéssel
 * ioconvert - Konvertálás a típusok között
 * iofiles - Files osztály használata
 * iofilestest - Fájlkezelés tesztelése
