@@ -189,10 +189,8 @@ Fájlkezelés
 * [iodatastream](src/main/java/iodatastream/) - Adatok írása OutputStreamre, és olvasás
 * [iozip](src/main/java/iozip/) - Bájtok írása tömörítéssel
 * [ioconvert](src/main/java/ioconvert/) - Konvertálás a típusok között
-
-  Itt tartok:
-* iofiles - Files osztály használata
-* iofilestest - Fájlkezelés tesztelése
+* [iofiles](src/main/java/iofiles/) - Files osztály használata
+* [iofiles](src/main/java/iofilestest/) - Fájlkezelés tesztelése
 
 ### Kollekciók és osztálykönyvtárak
 
