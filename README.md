@@ -190,7 +190,7 @@ Fájlkezelés
 * [iozip](src/main/java/iozip/) - Bájtok írása tömörítéssel
 * [ioconvert](src/main/java/ioconvert/) - Konvertálás a típusok között
 * [iofiles](src/main/java/iofiles/) - Files osztály használata
-* [iofiles](src/main/java/iofilestest/) - Fájlkezelés tesztelése
+* [iofilestest](src/main/java/iofilestest/) - Fájlkezelés tesztelése
 
 ### Kollekciók és osztálykönyvtárak
 
