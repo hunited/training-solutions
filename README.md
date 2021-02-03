@@ -196,7 +196,7 @@ Fájlkezelés
 
 Kollekció típusok
 
-* genericsusage - Generikusok használata, diamond operátor
+* [genericsusage](src/main/java/genericsusage/) - Generikusok használata, diamond operátor
 * collectionsequalshash - equals, hashCode
 * collectionslist - List, ArrayList kontra LinkedList
 * collectionsset - Set
