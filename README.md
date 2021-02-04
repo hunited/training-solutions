@@ -199,7 +199,7 @@ Kollekció típusok
 * [genericsusage](src/main/java/genericsusage/) - Generikusok használata, diamond operátor
 * [collectionsequalshash](src/main/java/collectionsequalshash/) - equals, hashCode
 * [collectionslist](src/main/java/collectionslist/) - List, ArrayList kontra LinkedList
-* collectionsset - Set
+* [collectionsset](src/main/java/collectionsset/) - Set
 * collectionsqueue - Queue
 * collectionsmap - Map
 * collectionsautoboxing - Autoboxing használata kollekcióknál
