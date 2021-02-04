@@ -200,7 +200,7 @@ Kollekció típusok
 * [collectionsequalshash](src/main/java/collectionsequalshash/) - equals, hashCode
 * [collectionslist](src/main/java/collectionslist/) - List, ArrayList kontra LinkedList
 * [collectionsset](src/main/java/collectionsset/) - Set
-* collectionsqueue - Queue
+* [collectionsqueue](src/main/java/collectionsqueue/) - Queue
 * collectionsmap - Map
 * collectionsautoboxing - Autoboxing használata kollekcióknál
 
