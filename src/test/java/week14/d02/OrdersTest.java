@@ -13,7 +13,7 @@ class OrdersTest {
 
     @BeforeEach
     void setUp() {
-        orders.readFile(Path.of("src/main/resources/week14.d02/orders.txt"));
+        orders.readFile(Path.of("src/main/resources/week14/d02/orders.txt"));
     }
 
     @Test
