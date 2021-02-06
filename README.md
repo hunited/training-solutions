@@ -207,7 +207,7 @@ Kollekció típusok
 Alapvető algoritmusok
 
 * [collectionsiterator](src/main/java/collectionsiterator/) - Bejárás
-* collectionscomp - Comparable és Comparator
+* [collectionscomp](src/main/java/collectionscomp/) - Comparable és Comparator
 * searching - Keresés
 * sorting - Rendezés
 * collectionsclass - Collections osztály (keresésen, rendezésen felüli metódusok)
