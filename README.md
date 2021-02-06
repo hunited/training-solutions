@@ -201,7 +201,7 @@ Kollekció típusok
 * [collectionslist](src/main/java/collectionslist/) - List, ArrayList kontra LinkedList
 * [collectionsset](src/main/java/collectionsset/) - Set
 * [collectionsqueue](src/main/java/collectionsqueue/) - Queue
-* collectionsmap - Map
+* [collectionsmap](src/main/java/collectionsmap/) - Map
 * [collectionsautoboxing](src/main/java/collectionsautoboxing/) - Autoboxing használata kollekcióknál
 
 Alapvető algoritmusok
