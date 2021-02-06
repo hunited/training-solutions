@@ -202,7 +202,7 @@ Kollekció típusok
 * [collectionsset](src/main/java/collectionsset/) - Set
 * [collectionsqueue](src/main/java/collectionsqueue/) - Queue
 * collectionsmap - Map
-* collectionsautoboxing - Autoboxing használata kollekcióknál
+* [collectionsautoboxing](src/main/java/collectionsautoboxing/) - Autoboxing használata kollekcióknál
 
 Alapvető algoritmusok
 
