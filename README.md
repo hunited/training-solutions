@@ -212,7 +212,7 @@ Alapvető algoritmusok
 * [searching](src/main/java/searching/) - Keresés
 * [sorting](src/main/java/sorting/) - Rendezés
 * [collectionsclass](src/main/java/collectionsclass/) - Collections osztály (keresésen, rendezésen felüli metódusok)
-* clone - A clone() metódus, deep clone
+* [clone](src/main/java/clone/) - A clone() metódus, deep clone
 * properties - Properties állományok
 
 Lambda kifejezések
