@@ -210,7 +210,7 @@ Alapvető algoritmusok
 * [collectionsiterator](src/main/java/collectionsiterator/) - Bejárás
 * [collectionscomp](src/main/java/collectionscomp/) - Comparable és Comparator
 * [searching](src/main/java/searching/) - Keresés
-* sorting - Rendezés
+* [sorting](src/main/java/sorting/) - Rendezés
 * collectionsclass - Collections osztály (keresésen, rendezésen felüli metódusok)
 * clone - A clone() metódus, deep clone
 * properties - Properties állományok
