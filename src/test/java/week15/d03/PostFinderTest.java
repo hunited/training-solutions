@@ -48,4 +48,17 @@ class PostFinderTest {
         assertThrows(NullPointerException.class, () -> new PostFinder(null));
     }
 
+    @Test
+    void findPostsForTestEmpty() {
+        assertThrows(NullPointerException.class, () -> pf.findPostsFor(null));
+        assertThrows(NullPointerException.class, () -> pf.findPostsFor(""));
+    }
+
+    @Test
+    void parameterIsNull() {
+        assertThrows(NullPointerException.class, () -> posts.add(
+                new Post("Cím", LocalDate.parse("2021-01-05"), null, "Sanyi")
+        ));
+    }
+
 }

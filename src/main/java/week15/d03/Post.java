@@ -10,6 +10,9 @@ public class Post {
     private final String owner;
 
     public Post(String title, LocalDate publishedAt, String content, String owner) {
+        if (title == null || publishedAt == null || content == null || owner == null) {
+            throw new NullPointerException("One or more parameter is null");
+        }
         this.title = title;
         this.publishedAt = publishedAt;
         this.content = content;

@@ -3,6 +3,7 @@ package week15.d03;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PostFinder {
 
@@ -20,6 +21,9 @@ public class PostFinder {
     }
 
     public List<Post> findPostsFor(String user) {
+        if (user == null || user.isEmpty()) {
+            throw new NullPointerException("User is empty or null");
+        }
         List<Post> result = new ArrayList<>();
         for (Post post : posts) {
             if (post.getOwner().equals(user) &&
