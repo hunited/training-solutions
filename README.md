@@ -217,7 +217,7 @@ Alapvető algoritmusok
 
 Lambda kifejezések
 
-* lambdaintro - Bevezetés a lambda kifejezések használatába
+* [lambdaintro](src/main/java/lambdaintro/) - Bevezetés a lambda kifejezések használatába
 * lambdaoptional - Optional használata
 * lambdacomparator - Comparator módosítások
 
