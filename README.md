@@ -28,6 +28,7 @@
 * [week13](src/main/java/week13/) - 13. hét feladatai
 * [week14](src/main/java/week14/) - 14. hét feladatai
 * [week15](src/main/java/week15/) - 15. hét feladatai
+* [week16](src/main/java/week16/) - 16. hét feladatai
 
 
 ### Bevezetés a nyelvi eszközökbe
