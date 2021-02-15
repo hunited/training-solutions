@@ -5,6 +5,7 @@
 
 ### Vizsga feladatok
 * [exam02](src/main/java/exam02/) - 2. vizsga: Gyakorlati rész
+* [exam03](src/main/java/exam03/) - 3. vizsga: Gyakorlati rész
 
 ### Projekt feladatok
 * [meetingrooms](src/main/java/meetingrooms/) - 1. projekt: MeetingRoom
