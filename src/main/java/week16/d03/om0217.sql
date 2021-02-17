@@ -1,0 +1,12 @@
+SELECT `forvaros` FROM `orszagok` WHERE `orszag` = 'Madagaszkár';
+SELECT `orszag` FROM `orszagok` WHERE `forvaros` = 'Ouagadougou';
+SELECT `orszag` FROM `orszagok` WHERE `autojel` = 'TT';
+SELECT `orszag` FROM `orszagok` WHERE `penzjel` = 'SGD';
+SELECT `orszag` FROM `orszagok` WHERE `telefon` = 61;
+SELECT `terulet` FROM `orszagok` WHERE `orszag` = 'Monaco';
+SELECT `nepesseg` FROM `orszagok` WHERE `orszag` = 'Málta';
+SELECT `nepesseg` / `terulet` * 1000 FROM `orszagok` WHERE `orszag` = 'Japán';
+SELECT `orszag` FROM `orszagok` WHERE `nepesseg` / `terulet` * 1000 > 500;
+SELECT `orszag` FROM `orszagok` WHERE `foldr_hely` LIKE '%Szigetország%';
+SELECT `orszag` FROM `orszagok` ORDER BY `terulet` DESC LIMIT 6;
+SELECT `orszag` FROM `orszagok` ORDER BY `terulet` ASC LIMIT 3;
