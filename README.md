@@ -31,6 +31,8 @@
 * [week15](src/main/java/week15/) - 15. hét feladatai
 * [week16](src/main/java/week16/) - 16. hét feladatai
 
+### Adatbázis programozás Java nyelven - JDBC
+* [activitytracker](src/main/java/activitytracker/) - Perzisztencia, adatbázis programozás JDBC technológiával
 
 ### Bevezetés a nyelvi eszközökbe
 
