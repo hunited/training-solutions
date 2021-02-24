@@ -2,9 +2,6 @@ package activitytracker;
 
 import org.mariadb.jdbc.MariaDbDataSource;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -95,7 +92,9 @@ public class ActivityDao {
             statement.setString(2, image.getFilename());
             statement.setBlob(3, blob);
             statement.executeUpdate();
-            return getIdByStatement(statement);
+            long id = getIdByStatement(statement);
+            image.setId(id);
+            return id;
         } catch (SQLException se) {
             throw new IllegalStateException("Can not insert image", se);
         }

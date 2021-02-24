@@ -98,7 +98,6 @@ class ActivityDaoTest {
         Activity test = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
                 "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2));
         dao.saveActivity(test);
-        System.out.println(test);
         List<TrackPoint> asserted = List.of(tp1, tp2);
         List<TrackPoint> result = dao.someTrackPoints(test.getId());
         assertEquals(asserted, result);
@@ -109,7 +108,6 @@ class ActivityDaoTest {
         Activity test = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
                 "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3, tp4));
         dao.saveActivity(test);
-        System.out.println(test);
         List<TrackPoint> asserted = List.of(tp1, tp2, tp4);
         List<TrackPoint> result = dao.someTrackPoints(test.getId());
         assertEquals(asserted, result);
@@ -124,7 +122,14 @@ class ActivityDaoTest {
     }
 
     @Test
-    void saveAndLoadImageToActivity() {
+    void saveImageToActivity() {
+        dao.saveActivity(activity1);
+        long id = dao.saveImageToActivity(activity1.getId(), new Image("filename.jpg", new byte[]{'a', 's', 'd', '1'}));
+        assertEquals(1, id);
+    }
+
+    @Test
+    void loadImageToActivity() {
         dao.saveActivity(activity1);
         dao.saveImageToActivity(activity1.getId(), new Image("filename.jpg", new byte[]{'a', 's', 'd', '1'}));
         Image asserted = new Image(1, "filename.jpg", new byte[]{'a', 's', 'd', '1'});
