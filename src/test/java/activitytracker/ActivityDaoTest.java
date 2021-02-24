@@ -57,6 +57,17 @@ class ActivityDaoTest {
     }
 
     @Test
+    void saveActivityWithError() {
+        assertThrows(IllegalArgumentException.class, () -> dao.saveActivity(
+                new Activity(LocalDateTime.parse("2021-02-03T15:47"), "Túra az Arborétumban", ActivityType.HIKING, List.of(
+                        new TrackPoint(LocalDate.parse("2021-05-02"), 47.5950470, 19.3407574),
+                        new TrackPoint(LocalDate.parse("2021-05-02"), 47.5950470, 19.3407574),
+                        new TrackPoint(LocalDate.parse("2021-05-02"), 181.5950470, 46.3407574)
+                ))
+        ));
+    }
+
+    @Test
     void findActivityById() {
         dao.saveActivity(activity1);
         Activity asserted = activity1;
@@ -65,6 +76,7 @@ class ActivityDaoTest {
         assertEquals(asserted.getStartTime(), result.getStartTime());
         assertEquals(asserted.getDesc(), result.getDesc());
         assertEquals(asserted.getType(), result.getType());
+        assertEquals(asserted.getTrackPoints().size(), result.getTrackPoints().size());
     }
 
     @Test
@@ -79,8 +91,7 @@ class ActivityDaoTest {
         dao.saveActivity(activity8);
         dao.saveActivity(activity9);
         List<Activity> asserted = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8, activity9);
-        assertEquals(asserted.toString(), dao.listActivities().toString());
-        System.out.println(asserted.toString());
+        assertEquals(asserted.size(), dao.listActivities().size());
     }
 
 }

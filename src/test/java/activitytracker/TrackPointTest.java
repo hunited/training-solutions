@@ -19,4 +19,11 @@ class TrackPointTest {
         assertEquals(19.3407574, trackPoint.getLon());
     }
 
+    @Test
+    void createTrackPointError() {
+        assertThrows(IllegalArgumentException.class, () -> new TrackPoint(
+                1, LocalDate.parse("2021-02-01"), 181.5950470, 46.3407574
+        ));
+    }
+
 }

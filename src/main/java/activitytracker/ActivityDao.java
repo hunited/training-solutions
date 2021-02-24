@@ -15,18 +15,13 @@ public class ActivityDao {
     }
 
     public Activity saveActivity(Activity activity) {
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statementActivity = connection.prepareStatement(
-                     "INSERT INTO `activities` (`start_time`, `activity_desc`, `activity_type`) VALUES (?, ?, ?);", Statement.RETURN_GENERATED_KEYS
-             )) {
-            statementActivity.setTimestamp(1, Timestamp.valueOf(activity.getStartTime()));
-            statementActivity.setString(2, activity.getDesc());
-            statementActivity.setString(3, activity.getType().toString());
-            statementActivity.executeUpdate();
-            long id = getIdByStatement(statementActivity);
-            activity.setId(id);
+        try (Connection connection = dataSource.getConnection()) {
+            connection.setAutoCommit(false);
+            long id = processingActivity(connection, activity);
             processingTrackPoints(id, activity.getTrackPoints(), connection);
-            return activity;
+            connection.commit();
+            activity.setId(id);
+            return findActivityById(id);
         } catch (SQLException se) {
             throw new IllegalStateException("Cannot insert", se);
         }
@@ -34,9 +29,11 @@ public class ActivityDao {
 
     public Activity findActivityById(long id) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `activities` WHERE `id` = ?")) {
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `activities` WHERE `id` = ?;")) {
             statement.setLong(1, id);
-            return selectActivityByResultSet(statement);
+            Activity result = selectActivityByResultSet(statement);
+            result.setTrackPoints(getTrackPoints(connection, result.getId()));
+            return result;
         } catch (SQLException se) {
             throw new IllegalStateException("Cannot connect to db", se);
         }
@@ -56,6 +53,18 @@ public class ActivityDao {
         }
     }
 
+    private long processingActivity(Connection connection, Activity activity) throws SQLException {
+        try (PreparedStatement statementActivity = connection.prepareStatement(
+                "INSERT INTO `activities` (`start_time`, `activity_desc`, `activity_type`) VALUES (?, ?, ?);", Statement.RETURN_GENERATED_KEYS
+        )) {
+            statementActivity.setTimestamp(1, Timestamp.valueOf(activity.getStartTime()));
+            statementActivity.setString(2, activity.getDesc());
+            statementActivity.setString(3, activity.getType().toString());
+            statementActivity.executeUpdate();
+            return getIdByStatement(statementActivity);
+        }
+    }
+
     private long getIdByStatement(PreparedStatement statement) {
         try (ResultSet resultSet = statement.getGeneratedKeys()) {
             if (resultSet.next()) {
@@ -72,25 +81,18 @@ public class ActivityDao {
                 "INSERT INTO `track_point` (`activity_id`, `time`, `lat`, `lon`) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS
         )) {
             for (TrackPoint trackPoint : trackPoints) {
-                processingTrackPointLine(statementTrackPoint, id, trackPoint);
+                statementTrackPoint.setLong(1, id);
+                statementTrackPoint.setTimestamp(2, Timestamp.valueOf(trackPoint.getTime().atStartOfDay()));
+                statementTrackPoint.setDouble(3, trackPoint.getLat());
+                statementTrackPoint.setDouble(4, trackPoint.getLon());
+                statementTrackPoint.executeUpdate();
+                trackPoint.setId(getIdByStatement(statementTrackPoint));
             }
-            connection.commit();
         } catch (IllegalArgumentException iae) {
             connection.rollback();
         } catch (SQLException se) {
             throw new IllegalStateException("Cannot insert", se);
         }
-    }
-
-    private void processingTrackPointLine(PreparedStatement statementTrackPoint, long id, TrackPoint trackPoint) throws SQLException {
-        if (trackPoint.getLat() > 90 || trackPoint.getLat() < -90 || trackPoint.getLon() > 180 || trackPoint.getLon() < -180) {
-            throw new IllegalArgumentException("Invalid coordinates");
-        }
-        statementTrackPoint.setLong(1, id);
-        statementTrackPoint.setTimestamp(2, Timestamp.valueOf(trackPoint.getTime().atStartOfDay()));
-        statementTrackPoint.setDouble(3, trackPoint.getLat());
-        statementTrackPoint.setDouble(4, trackPoint.getLon());
-        statementTrackPoint.executeUpdate();
     }
 
     private Activity selectActivityByResultSet(PreparedStatement statement) throws SQLException {
@@ -110,6 +112,24 @@ public class ActivityDao {
                 resultSet.getString("activity_desc"),
                 ActivityType.valueOf(resultSet.getString("activity_type"))
         );
+    }
+
+    private List<TrackPoint> getTrackPoints(Connection connection, long id) throws SQLException {
+        List<TrackPoint> result = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM `track_point` WHERE `activity_id` = ?;")) {
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                TrackPoint trackPoint = new TrackPoint(
+                        resultSet.getLong("id"),
+                        resultSet.getTimestamp("time").toLocalDateTime().toLocalDate(),
+                        resultSet.getDouble("lat"),
+                        resultSet.getDouble("lon")
+                );
+                result.add(trackPoint);
+            }
+        }
+        return result;
     }
 
 }
