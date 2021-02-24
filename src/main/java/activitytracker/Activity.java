@@ -3,6 +3,7 @@ package activitytracker;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Activity {
 
@@ -63,6 +64,19 @@ public class Activity {
         } else {
             return "Activity id: " + id + ", startTime: " + startTime + ", desc: " + desc + ", type: " + type + ", TrackPoints: " + trackPoints + ".";
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Activity)) return false;
+        Activity activity = (Activity) o;
+        return id == activity.id && Objects.equals(startTime, activity.startTime) && Objects.equals(desc, activity.desc) && type == activity.type && Objects.equals(trackPoints, activity.trackPoints);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, startTime, desc, type, trackPoints);
     }
 
 }

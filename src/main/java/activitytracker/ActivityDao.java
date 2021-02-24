@@ -31,7 +31,7 @@ public class ActivityDao {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM `activities` WHERE `id` = ?;")) {
             statement.setLong(1, id);
-            Activity result = selectActivityByResultSet(statement);
+            Activity result = getActivityByResultSet(statement);
             result.setTrackPoints(getTrackPoints(connection, result.getId()));
             return result;
         } catch (SQLException se) {
@@ -42,10 +42,10 @@ public class ActivityDao {
     public List<Activity> listActivities() {
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM `activities` ORDER BY `id`")) {
+             ResultSet resultSet = statement.executeQuery("SELECT `id` FROM `activities` ORDER BY `id`")) {
             List<Activity> activities = new ArrayList<>();
             while (resultSet.next()) {
-                activities.add(getActivity(resultSet));
+                activities.add(findActivityById(resultSet.getLong(1)));
             }
             return activities;
         } catch (SQLException se) {
@@ -65,17 +65,6 @@ public class ActivityDao {
         }
     }
 
-    private long getIdByStatement(PreparedStatement statement) {
-        try (ResultSet resultSet = statement.getGeneratedKeys()) {
-            if (resultSet.next()) {
-                return resultSet.getLong(1);
-            }
-            throw new IllegalStateException("Can not get ID");
-        } catch (SQLException se) {
-            throw new IllegalStateException("Something went wrong", se);
-        }
-    }
-
     private void processingTrackPoints(long id, List<TrackPoint> trackPoints, Connection connection) throws SQLException {
         try (PreparedStatement statementTrackPoint = connection.prepareStatement(
                 "INSERT INTO `track_point` (`activity_id`, `time`, `lat`, `lon`) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS
@@ -90,28 +79,33 @@ public class ActivityDao {
             }
         } catch (IllegalArgumentException iae) {
             connection.rollback();
-        } catch (SQLException se) {
-            throw new IllegalStateException("Cannot insert", se);
         }
     }
 
-    private Activity selectActivityByResultSet(PreparedStatement statement) throws SQLException {
+    private long getIdByStatement(PreparedStatement statement) {
+        try (ResultSet resultSet = statement.getGeneratedKeys()) {
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
+            }
+            throw new IllegalStateException("Can not get ID");
+        } catch (SQLException se) {
+            throw new IllegalStateException("Something went wrong", se);
+        }
+    }
+
+    private Activity getActivityByResultSet(PreparedStatement statement) throws SQLException {
         try (ResultSet resultSet = statement.executeQuery()) {
             if (resultSet.next()) {
-                return getActivity(resultSet);
+                return new Activity(
+                        resultSet.getLong("id"),
+                        resultSet.getTimestamp("start_time").toLocalDateTime(),
+                        resultSet.getString("activity_desc"),
+                        ActivityType.valueOf(resultSet.getString("activity_type"))
+                );
             } else {
                 throw new IllegalArgumentException("Not found this id");
             }
         }
-    }
-
-    private Activity getActivity(ResultSet resultSet) throws SQLException {
-        return new Activity(
-                resultSet.getLong("id"),
-                resultSet.getTimestamp("start_time").toLocalDateTime(),
-                resultSet.getString("activity_desc"),
-                ActivityType.valueOf(resultSet.getString("activity_type"))
-        );
     }
 
     private List<TrackPoint> getTrackPoints(Connection connection, long id) throws SQLException {

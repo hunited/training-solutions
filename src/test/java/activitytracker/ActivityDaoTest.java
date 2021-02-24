@@ -15,23 +15,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class ActivityDaoTest {
 
     private static final String NAME_AND_PW = "activitytracker";
+
     private ActivityDao dao;
-    private final Activity activity1 = new Activity(LocalDateTime.parse("2021-02-01T13:08"), "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(
-            new TrackPoint(LocalDate.parse("2021-02-01"), 47.5950470, 19.3407574),
-            new TrackPoint(LocalDate.parse("2021-02-01"), 47.5950470, 19.3407574),
-            new TrackPoint(LocalDate.parse("2021-02-01"), 47.5950470, 19.3407574)
-    ));
-    private final Activity activity2 = new Activity(LocalDateTime.parse("2021-02-02T14:52"), "Kosár a Rönkös játszótéren", ActivityType.BASKETBALL, List.of(
-            new TrackPoint(LocalDate.parse("2021-02-02"), 47.5950470, 19.3407574),
-            new TrackPoint(LocalDate.parse("2021-02-02"), 47.5950470, 19.3407574)
-    ));
-    private final Activity activity3 = new Activity(LocalDateTime.parse("2021-02-03T15:47"), "Túra az Arborétumban", ActivityType.HIKING);
-    private final Activity activity4 = new Activity(LocalDateTime.parse("2021-02-04T16:31"), "Bringázás a Hungaroringhez", ActivityType.BIKING);
-    private final Activity activity5 = new Activity(LocalDateTime.parse("2021-02-05T17:29"), "Túra a Margitára", ActivityType.HIKING);
-    private final Activity activity6 = new Activity(LocalDateTime.parse("2021-02-06T08:43"), "Bringázás a park kerékpárpályához", ActivityType.BIKING);
-    private final Activity activity7 = new Activity(LocalDateTime.parse("2021-02-07T09:15"), "Futás a kutya után", ActivityType.RUNNING);
-    private final Activity activity8 = new Activity(LocalDateTime.parse("2021-02-08T10:24"), "Kosár a haverokkal a suliban", ActivityType.BASKETBALL);
-    private final Activity activity9 = new Activity(LocalDateTime.parse("2021-02-09T11:56"), "Futás az életemért a szavannán", ActivityType.RUNNING);
+
+    private final TrackPoint tp1 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5950470, 19.3407574);
+    private final TrackPoint tp2 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.6034720, 19.3502194);
+    private final TrackPoint tp3 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5665321, 19.3837357);
+    private final TrackPoint tp4 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5826489, 19.2500236);
+    private final TrackPoint tp5 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.6447091, 19.3304097);
+
+    private final Activity activity1 = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
+            "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3));
+    private final Activity activity2 = new Activity(LocalDateTime.parse("2021-02-02T14:52"),
+            "Kosár a Rönkös játszótéren", ActivityType.BASKETBALL, List.of(tp4, tp5));
+    private final Activity activity3 = new Activity(LocalDateTime.parse("2021-02-03T15:47"),
+            "Túra az Arborétumban", ActivityType.HIKING);
+    private final Activity activity4 = new Activity(LocalDateTime.parse("2021-02-04T16:31"),
+            "Bringázás a Hungaroringhez", ActivityType.BIKING);
+    private final Activity activity5 = new Activity(LocalDateTime.parse("2021-02-05T17:29"),
+            "Túra a Margitára", ActivityType.HIKING);
 
     @BeforeEach
     void setUp() {
@@ -59,24 +61,17 @@ class ActivityDaoTest {
     @Test
     void saveActivityWithError() {
         assertThrows(IllegalArgumentException.class, () -> dao.saveActivity(
-                new Activity(LocalDateTime.parse("2021-02-03T15:47"), "Túra az Arborétumban", ActivityType.HIKING, List.of(
-                        new TrackPoint(LocalDate.parse("2021-05-02"), 47.5950470, 19.3407574),
-                        new TrackPoint(LocalDate.parse("2021-05-02"), 47.5950470, 19.3407574),
-                        new TrackPoint(LocalDate.parse("2021-05-02"), 181.5950470, 46.3407574)
-                ))
+                new Activity(LocalDateTime.parse("2021-02-03T15:47"), "Túra az Arborétumban", ActivityType.HIKING,
+                        List.of(tp1, new TrackPoint(LocalDate.parse("2021-05-02"), 181.5950470, 46.3407574))
+                )
         ));
     }
 
     @Test
     void findActivityById() {
         dao.saveActivity(activity1);
-        Activity asserted = activity1;
         Activity result = dao.findActivityById(activity1.getId());
-        assertEquals(asserted.getId(), result.getId());
-        assertEquals(asserted.getStartTime(), result.getStartTime());
-        assertEquals(asserted.getDesc(), result.getDesc());
-        assertEquals(asserted.getType(), result.getType());
-        assertEquals(asserted.getTrackPoints().size(), result.getTrackPoints().size());
+        assertEquals(activity1, result);
     }
 
     @Test
@@ -86,12 +81,8 @@ class ActivityDaoTest {
         dao.saveActivity(activity3);
         dao.saveActivity(activity4);
         dao.saveActivity(activity5);
-        dao.saveActivity(activity6);
-        dao.saveActivity(activity7);
-        dao.saveActivity(activity8);
-        dao.saveActivity(activity9);
-        List<Activity> asserted = List.of(activity1, activity2, activity3, activity4, activity5, activity6, activity7, activity8, activity9);
-        assertEquals(asserted.size(), dao.listActivities().size());
+        List<Activity> asserted = List.of(activity1, activity2, activity3, activity4, activity5);
+        assertEquals(asserted, dao.listActivities());
     }
 
 }

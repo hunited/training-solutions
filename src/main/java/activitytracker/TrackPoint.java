@@ -1,6 +1,7 @@
 package activitytracker;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TrackPoint {
 
@@ -49,6 +50,19 @@ public class TrackPoint {
     @Override
     public String toString() {
         return "TrackPoint id: " + id + ", time: " + time + ", latitude: " + lat + ", longitude: " + lon + ".";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TrackPoint)) return false;
+        TrackPoint that = (TrackPoint) o;
+        return id == that.id && Double.compare(that.lat, lat) == 0 && Double.compare(that.lon, lon) == 0 && Objects.equals(time, that.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, time, lat, lon);
     }
 
 }
