@@ -25,9 +25,9 @@ class ActivityDaoTest {
     private final TrackPoint tp5 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.6447091, 19.3304097);
 
     private final Activity activity1 = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
-            "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3));
+            "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3, tp4, tp5));
     private final Activity activity2 = new Activity(LocalDateTime.parse("2021-02-02T14:52"),
-            "Kosár a Rönkös játszótéren", ActivityType.BASKETBALL, List.of(tp4, tp5));
+            "Kosár a Rönkös játszótéren", ActivityType.BASKETBALL);
     private final Activity activity3 = new Activity(LocalDateTime.parse("2021-02-03T15:47"),
             "Túra az Arborétumban", ActivityType.HIKING);
     private final Activity activity4 = new Activity(LocalDateTime.parse("2021-02-04T16:31"),
@@ -55,7 +55,7 @@ class ActivityDaoTest {
     void saveActivity() {
         Activity result = dao.saveActivity(activity1);
         assertEquals(1, result.getId());
-        assertEquals(3, result.getTrackPoints().size());
+        assertEquals(5, result.getTrackPoints().size());
     }
 
     @Test
@@ -83,6 +83,44 @@ class ActivityDaoTest {
         dao.saveActivity(activity5);
         List<Activity> asserted = List.of(activity1, activity2, activity3, activity4, activity5);
         assertEquals(asserted, dao.listActivities());
+    }
+
+    @Test
+    void someTrackPoints() {
+        dao.saveActivity(activity1);
+        List<TrackPoint> asserted = List.of(tp1, tp3, tp5);
+        List<TrackPoint> result = dao.someTrackPoints(activity1.getId());
+        assertEquals(asserted, result);
+    }
+
+    @Test
+    void someTrackPointsTwo() {
+        Activity test = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
+                "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2));
+        dao.saveActivity(test);
+        System.out.println(test);
+        List<TrackPoint> asserted = List.of(tp1, tp2);
+        List<TrackPoint> result = dao.someTrackPoints(test.getId());
+        assertEquals(asserted, result);
+    }
+
+    @Test
+    void someTrackPointsFour() {
+        Activity test = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
+                "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3, tp4));
+        dao.saveActivity(test);
+        System.out.println(test);
+        List<TrackPoint> asserted = List.of(tp1, tp2, tp4);
+        List<TrackPoint> result = dao.someTrackPoints(test.getId());
+        assertEquals(asserted, result);
+    }
+
+    @Test
+    void someTrackPointsEmpty() {
+        dao.saveActivity(activity2);
+        List<TrackPoint> asserted = List.of();
+        List<TrackPoint> result = dao.someTrackPoints(activity2.getId());
+        assertEquals(asserted, result);
     }
 
 }

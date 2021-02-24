@@ -4,6 +4,7 @@ import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ActivityDao {
@@ -50,6 +51,33 @@ public class ActivityDao {
             return activities;
         } catch (SQLException se) {
             throw new IllegalStateException("Can not create activities", se);
+        }
+    }
+
+    public List<TrackPoint> someTrackPoints(long activityId) {
+        List<TrackPoint> result = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT * FROM `track_point` WHERE `activity_id` = 1 ORDER BY ?;",
+                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+            statement.setLong(1, activityId);
+            ResultSet resultSet = statement.executeQuery();
+            int size = getSize(resultSet);
+            if (size == 0) {
+                return Collections.emptyList();
+            }
+            if (resultSet.first()) {
+                result.add(getTrackPoint(resultSet));
+            }
+            if (size > 2 && resultSet.absolute(size % 2 == 0 ? size / 2 : size / 2 + 1)) {
+                result.add(getTrackPoint(resultSet));
+            }
+            if (resultSet.last()) {
+                result.add(getTrackPoint(resultSet));
+            }
+            return result;
+        } catch (SQLException se) {
+            throw new IllegalStateException("Cannot select TrackPoints", se);
         }
     }
 
@@ -114,16 +142,27 @@ public class ActivityDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                TrackPoint trackPoint = new TrackPoint(
-                        resultSet.getLong("id"),
-                        resultSet.getTimestamp("time").toLocalDateTime().toLocalDate(),
-                        resultSet.getDouble("lat"),
-                        resultSet.getDouble("lon")
-                );
-                result.add(trackPoint);
+                result.add(getTrackPoint(resultSet));
             }
         }
         return result;
+    }
+
+    private TrackPoint getTrackPoint(ResultSet resultSet) throws SQLException {
+        return new TrackPoint(
+                resultSet.getLong("id"),
+                resultSet.getTimestamp("time").toLocalDateTime().toLocalDate(),
+                resultSet.getDouble("lat"),
+                resultSet.getDouble("lon")
+        );
+    }
+
+    private int getSize(ResultSet resultSet) throws SQLException {
+        int count = 0;
+        while (resultSet.next()) {
+            ++count;
+        }
+        return count;
     }
 
 }
