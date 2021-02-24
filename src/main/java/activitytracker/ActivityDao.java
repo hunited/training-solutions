@@ -2,6 +2,9 @@ package activitytracker;
 
 import org.mariadb.jdbc.MariaDbDataSource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +61,7 @@ public class ActivityDao {
         List<TrackPoint> result = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     "SELECT * FROM `track_point` WHERE `activity_id` = 1 ORDER BY ?;",
+                     "SELECT * FROM `track_point` WHERE `activity_id` = ? ORDER BY `id`;",
                      ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             statement.setLong(1, activityId);
             ResultSet resultSet = statement.executeQuery();
@@ -78,6 +81,42 @@ public class ActivityDao {
             return result;
         } catch (SQLException se) {
             throw new IllegalStateException("Cannot select TrackPoints", se);
+        }
+    }
+
+    public long saveImageToActivity(long activityId, Image image) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     "INSERT INTO `images`(`activity_id`, `filename`, `content`) VALUES (?, ?, ?);", Statement.RETURN_GENERATED_KEYS
+             )) {
+            Blob blob = connection.createBlob();
+            blob.setBytes(1, image.getContent());
+            statement.setLong(1, activityId);
+            statement.setString(2, image.getFilename());
+            statement.setBlob(3, blob);
+            statement.executeUpdate();
+            return getIdByStatement(statement);
+        } catch (SQLException se) {
+            throw new IllegalStateException("Can not insert image", se);
+        }
+    }
+
+    public Image loadImageToActivity(long activityId, String filename) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `images` WHERE `activity_id` = ? AND `filename` = ?;")) {
+            statement.setLong(1, activityId);
+            statement.setString(2, filename);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Image(
+                        resultSet.getLong("id"),
+                        resultSet.getString("filename"),
+                        resultSet.getBytes("content")
+                );
+            }
+            throw new IllegalStateException("Not found");
+        } catch (SQLException se) {
+            throw new IllegalStateException("Can not read image", se);
         }
     }
 

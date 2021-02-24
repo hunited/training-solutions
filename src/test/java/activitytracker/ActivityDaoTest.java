@@ -123,4 +123,13 @@ class ActivityDaoTest {
         assertEquals(asserted, result);
     }
 
+    @Test
+    void saveAndLoadImageToActivity() {
+        dao.saveActivity(activity1);
+        dao.saveImageToActivity(activity1.getId(), new Image("filename.jpg", new byte[]{'a', 's', 'd', '1'}));
+        Image asserted = new Image(1, "filename.jpg", new byte[]{'a', 's', 'd', '1'});
+        Image result = dao.loadImageToActivity(activity1.getId(), "filename.jpg");
+        assertEquals(asserted, result);
+    }
+
 }
