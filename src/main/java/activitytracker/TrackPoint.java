@@ -1,21 +1,21 @@
 package activitytracker;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TrackPoint {
 
     private long id;
-    private final LocalDate time;
+    private final LocalDateTime time;
     private final double lat;
     private final double lon;
 
-    public TrackPoint(long id, LocalDate time, double lat, double lon) {
+    public TrackPoint(long id, LocalDateTime time, double lat, double lon) {
         this(time, lat, lon);
         this.id = id;
     }
 
-    public TrackPoint(LocalDate time, double lat, double lon) {
+    public TrackPoint(LocalDateTime time, double lat, double lon) {
         this.time = time;
         if (lat > 90 || lat < -90) {
             throw new IllegalArgumentException("Invalid latitude");
@@ -35,7 +35,7 @@ public class TrackPoint {
         this.id = id;
     }
 
-    public LocalDate getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 

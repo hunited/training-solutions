@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,11 +17,11 @@ class ActivityDaoTest {
 
     private ActivityDao dao;
 
-    private final TrackPoint tp1 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5950470, 19.3407574);
-    private final TrackPoint tp2 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.6034720, 19.3502194);
-    private final TrackPoint tp3 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5665321, 19.3837357);
-    private final TrackPoint tp4 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.5826489, 19.2500236);
-    private final TrackPoint tp5 = new TrackPoint(LocalDate.parse("2021-02-01"), 47.6447091, 19.3304097);
+    private final TrackPoint tp1 = new TrackPoint(LocalDateTime.parse("2021-02-01T13:08"), 47.5950470, 19.3407574);
+    private final TrackPoint tp2 = new TrackPoint(LocalDateTime.parse("2021-02-01T14:52"), 47.6034720, 19.3502194);
+    private final TrackPoint tp3 = new TrackPoint(LocalDateTime.parse("2021-02-01T15:47"), 47.5665321, 19.3837357);
+    private final TrackPoint tp4 = new TrackPoint(LocalDateTime.parse("2021-02-01T16:31"), 47.5826489, 19.2500236);
+    private final TrackPoint tp5 = new TrackPoint(LocalDateTime.parse("2021-02-01T17:29"), 47.6447091, 19.3304097);
 
     private final Activity activity1 = new Activity(LocalDateTime.parse("2021-02-01T13:08"),
             "Futás az Erzsébet parkban", ActivityType.RUNNING, List.of(tp1, tp2, tp3, tp4, tp5));
@@ -62,9 +61,10 @@ class ActivityDaoTest {
     void saveActivityWithError() {
         assertThrows(IllegalArgumentException.class, () -> dao.saveActivity(
                 new Activity(LocalDateTime.parse("2021-02-03T15:47"), "Túra az Arborétumban", ActivityType.HIKING,
-                        List.of(tp1, new TrackPoint(LocalDate.parse("2021-05-02"), 181.5950470, 46.3407574))
+                        List.of(tp1, new TrackPoint(LocalDateTime.parse("2021-05-02T15:47"), 181.5950470, 46.3407574))
                 )
         ));
+        assertEquals(0, dao.listActivities().size());
     }
 
     @Test

@@ -18,8 +18,8 @@ public class ActivityDao {
     public Activity saveActivity(Activity activity) {
         try (Connection connection = dataSource.getConnection()) {
             connection.setAutoCommit(false);
-            long id = processingActivity(connection, activity);
-            processingTrackPoints(id, activity.getTrackPoints(), connection);
+            long id = processActivity(connection, activity);
+            processTrackPoints(id, activity.getTrackPoints(), connection);
             connection.commit();
             activity.setId(id);
             return findActivityById(id);
@@ -119,7 +119,7 @@ public class ActivityDao {
         }
     }
 
-    private long processingActivity(Connection connection, Activity activity) throws SQLException {
+    private long processActivity(Connection connection, Activity activity) throws SQLException {
         try (PreparedStatement statementActivity = connection.prepareStatement(
                 "INSERT INTO `activities` (`start_time`, `activity_desc`, `activity_type`) VALUES (?, ?, ?);", Statement.RETURN_GENERATED_KEYS
         )) {
@@ -131,13 +131,13 @@ public class ActivityDao {
         }
     }
 
-    private void processingTrackPoints(long id, List<TrackPoint> trackPoints, Connection connection) throws SQLException {
+    private void processTrackPoints(long id, List<TrackPoint> trackPoints, Connection connection) throws SQLException {
         try (PreparedStatement statementTrackPoint = connection.prepareStatement(
                 "INSERT INTO `track_point` (`activity_id`, `time`, `lat`, `lon`) VALUES (?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS
         )) {
             for (TrackPoint trackPoint : trackPoints) {
                 statementTrackPoint.setLong(1, id);
-                statementTrackPoint.setTimestamp(2, Timestamp.valueOf(trackPoint.getTime().atStartOfDay()));
+                statementTrackPoint.setTimestamp(2, Timestamp.valueOf(trackPoint.getTime()));
                 statementTrackPoint.setDouble(3, trackPoint.getLat());
                 statementTrackPoint.setDouble(4, trackPoint.getLon());
                 statementTrackPoint.executeUpdate();
@@ -189,7 +189,7 @@ public class ActivityDao {
     private TrackPoint getTrackPoint(ResultSet resultSet) throws SQLException {
         return new TrackPoint(
                 resultSet.getLong("id"),
-                resultSet.getTimestamp("time").toLocalDateTime().toLocalDate(),
+                resultSet.getTimestamp("time").toLocalDateTime(),
                 resultSet.getDouble("lat"),
                 resultSet.getDouble("lon")
         );
