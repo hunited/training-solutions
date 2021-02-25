@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DatabaseMetadataDaoTest {
 
     private static final String NAME_AND_PW = "employees";
+
     private DatabaseMetadataDao dao;
-    private Flyway flyway;
 
     @BeforeEach
     void setUp() {
@@ -27,15 +27,14 @@ class DatabaseMetadataDaoTest {
             throw new IllegalStateException("Can not connect to database", se);
         }
         dao = new DatabaseMetadataDao(dataSource);
-        flyway = Flyway.configure().dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        flyway.clean();
+        flyway.migrate();
     }
 
     @Test
     void getTableNames() {
-        flyway.clean();
-        flyway.migrate();
         List<String> result = dao.getColumnsForTable("activities");
-        System.out.println(result);
         assertTrue(result.contains("activity_type"));
     }
 
