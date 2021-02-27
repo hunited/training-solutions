@@ -13,6 +13,7 @@
 * [catalog](src/main/java/catalog/) - 3. projekt: Catalog
 * [activity](src/main/java/activity/) - 4. projekt: Activity
 * [timesheet](src/main/java/timesheet/) - 5. projekt: Timesheet
+* [covid](src/main/java/covid/) - 6. záró projekt: Oltásokat kezelő alkalmazás
 
 ### Napi feladatok
 * [week02](src/main/java/week02/) - 02. hét feladatai
