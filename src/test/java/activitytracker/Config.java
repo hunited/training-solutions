@@ -29,7 +29,7 @@ public class Config {
 
     @Bean
     public Flyway flyway() {
-        return Flyway.configure().dataSource(dataSource).load();
+        return Flyway.configure().locations("filesystem:src/main/resources/activitytracker").dataSource(dataSource).load();
     }
 
     @Bean
