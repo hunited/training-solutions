@@ -29,23 +29,10 @@ public class Citizen {
             throw new IllegalArgumentException("Email format error");
         }
         this.email = email.trim();
-        if (!validSsn(ssn.trim())) {
+        if (!dao.validSsn(ssn.trim())) {
             throw new IllegalArgumentException("SSN number is non valid");
         }
         this.ssn = ssn.trim();
-    }
-
-    private boolean validSsn(String ssn) {
-        if (ssn.length() != 9) {
-            return false;
-        }
-        int sum = 0;
-        for (int i = 0; i < ssn.length() - 1; i++) {
-            int num = Character.getNumericValue(ssn.charAt(i));
-            sum += i % 2 == 0 ? num * 3 : num * 7;
-        }
-        int cNumber = Character.getNumericValue(ssn.charAt(ssn.length() - 1));
-        return sum % 10 == cNumber;
     }
 
 }

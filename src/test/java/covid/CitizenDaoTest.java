@@ -33,4 +33,22 @@ class CitizenDaoTest {
         assertEquals(List.of("Gödöllő"), dao.getSettlementsByZip("2100"));
     }
 
+    @Test
+    void validSsn() {
+        assertTrue(dao.validSsn("123456788"));
+        assertFalse(dao.validSsn("123456787"));
+    }
+
+    @Test
+    void uploadCitizensFromFile() {
+        assertEquals("Successfully uploaded 1000 citizens (columns: Név;Irányítószám;Életkor;E-mail cím;Taj szám).",
+                dao.uploadCitizensFromFile("registered-persons-1000.csv"));
+    }
+
+    @Test
+    void uploadCitizenToDb() {
+        Citizen citizen = new Citizen("Gasparics Sándor", "2100", 40, "hunited@gmail.com", "123458603");
+        assertEquals(1, dao.uploadCitizenToDb(citizen));
+    }
+
 }

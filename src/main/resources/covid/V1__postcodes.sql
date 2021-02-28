@@ -1,5 +1,5 @@
 CREATE TABLE `postcodes` (
-	`id` INT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`id` BIGINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`zip` VARCHAR(4) NOT NULL COLLATE 'utf8_hungarian_ci',
 	`settlement` VARCHAR(50) NOT NULL COLLATE 'utf8_hungarian_ci',
 	`settlement_part` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_hungarian_ci',
