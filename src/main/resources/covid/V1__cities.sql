@@ -1,12 +1,12 @@
-CREATE TABLE `postcodes` (
-	`id` BIGINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `cities` (
+	`settlement_id` BIGINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`zip` VARCHAR(4) NOT NULL COLLATE 'utf8_hungarian_ci',
 	`settlement` VARCHAR(50) NOT NULL COLLATE 'utf8_hungarian_ci',
 	`settlement_part` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_hungarian_ci',
-	PRIMARY KEY (`id`) USING BTREE
+	PRIMARY KEY (`settlement_id`) USING BTREE
 )
 COLLATE='utf8_hungarian_ci';
-INSERT INTO `postcodes` (`zip`, `settlement`, `settlement_part`) VALUES 
+INSERT INTO `cities` (`zip`, `settlement`, `settlement_part`) VALUES
 ('2000', 'Szentendre', ''),
 ('2009', 'Pilisszentlászló', ''),
 ('2011', 'Budakalász', ''),

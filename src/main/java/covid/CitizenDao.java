@@ -33,7 +33,7 @@ public class CitizenDao {
     }
 
     public List<String> getSettlementsByZip(String zipCode) {
-        return jdbcTemplate.query("SELECT `settlement` FROM `postcodes` WHERE `zip` = ? ORDER BY `settlement`",
+        return jdbcTemplate.query("SELECT `settlement` FROM `cities` WHERE `zip` = ? ORDER BY `settlement`",
                 (resultSet, i) -> resultSet.getString("settlement"), zipCode);
     }
 
