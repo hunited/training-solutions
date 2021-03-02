@@ -46,7 +46,7 @@ class CitizenTest {
     @Test
     void createCitizenFailEmail() {
         assertThrows(IllegalArgumentException.class, () -> new Citizen(
-                "Gasparics Sándor", "2100", 40, "h@n", "123458603")
+                "Gasparics Sándor", "2100", 40, "h@", "123458603")
         );
         assertThrows(IllegalArgumentException.class, () -> new Citizen(
                 "Gasparics Sándor", "2100", 40, "hunitedgmail.com", "123458603")
