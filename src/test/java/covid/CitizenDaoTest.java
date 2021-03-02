@@ -41,7 +41,7 @@ class CitizenDaoTest {
 
     @Test
     void uploadCitizensFromFile() {
-        assertEquals("Successfully uploaded 1000 citizens (columns: Név;Irányítószám;Életkor;E-mail cím;Taj szám).",
+        assertEquals("Sikeresen feltöltve 1000 páciens (oszlopok: Név;Irányítószám;Életkor;E-mail cím;Taj szám).",
                 dao.uploadCitizensFromFile("registered-persons-1000.csv"));
     }
 
