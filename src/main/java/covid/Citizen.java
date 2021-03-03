@@ -3,7 +3,7 @@ package covid;
 import lombok.Data;
 
 @Data
-public class Citizen extends CitizenDao {
+public class Citizen extends Validator {
 
     private final String fullName;
     private final String zipCode;
