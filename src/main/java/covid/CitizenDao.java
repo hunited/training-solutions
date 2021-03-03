@@ -17,6 +17,7 @@ import java.util.Objects;
 public class CitizenDao {
 
     private static final String NAME_AND_PW = "covid";
+    private static final LocalDateTime MINUS_15_DAY = LocalDateTime.now().minusDays(15);
     private final JdbcTemplate jdbcTemplate;
 
     public CitizenDao() {
@@ -63,8 +64,24 @@ public class CitizenDao {
         return zipCode;
     }
 
+    public int hasSuitableTajInCitizens(String taj) {
+        String query = """
+                SELECT `citizen_id`
+                FROM `citizens`
+                WHERE `taj` = ? AND `number_of_vaccination` < 2 AND (
+                    `last_vaccination` < ? OR `last_vaccination` IS NULL
+                ) LIMIT 1""";
+        List<Integer> result = jdbcTemplate.query(
+                query, (resultSet, i) -> resultSet.getInt("citizen_id"),
+                taj, MINUS_15_DAY
+        );
+        if (result.isEmpty()) {
+            throw new IllegalArgumentException("Ezzel a TAJ számmal nincs paciens az adatbázisban, vagy jelenleg nem jogosult az oltásra!");
+        }
+        return result.get(0);
+    }
+
     public List<String> listRowsByZip(String zip) {
-        LocalDateTime ldt = LocalDateTime.now().minusDays(15);
         String query = """
                 SELECT `citizen_name`, `zip`, `age`, `email`, `taj`
                 FROM `citizens`
@@ -78,8 +95,8 @@ public class CitizenDao {
                         resultSet.getString("zip") + ";" +
                         resultSet.getInt("age") + ";" +
                         resultSet.getString("email") + ";" +
-                        resultSet.getString("taj")
-                , zip, ldt
+                        resultSet.getString("taj"),
+                zip, MINUS_15_DAY
         );
         return getTimeTable(result);
     }

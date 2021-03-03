@@ -7,9 +7,9 @@ import static java.lang.System.*;
 public class CovidMain {
 
     private final Scanner scanner = new Scanner(in);
-    private final Validator validator = new Validator();
     private final CitizenDao dao = new CitizenDao();
     private final CovidFileManager cfm = new CovidFileManager();
+    private final Validator validator = new Validator();
 
     public void runMenu() {
         printMenu();
@@ -23,11 +23,11 @@ public class CovidMain {
             } else if (selection == 3) {
                 generateListByZip();
             } else if (selection == 4) {
-                registerCitizen();
+                vaccinationSucces();
             } else if (selection == 5) {
-                registerCitizen();
+                vaccinationFailure();
             } else if (selection == 6) {
-                registerCitizen();
+                riport();
             } else if (selection == 7) {
                 out.println("Viszont látásra!");
                 return;
@@ -94,6 +94,26 @@ public class CovidMain {
             throwIAE(iae);
             generateListByZip();
         }
+    }
+
+    private void vaccinationSucces() {
+        out.println("Oltás beadásának könyvelése");
+        try {
+            out.println("Kérem adja meg a paciens TAJ számát!");
+            int citizenId = dao.hasSuitableTajInCitizens(validator.validateSSN(scanner.nextLine()));
+            // Itt folytasd
+        } catch (IllegalArgumentException iae) {
+            throwIAE(iae);
+            vaccinationSucces();
+        }
+    }
+
+    private void vaccinationFailure() {
+
+    }
+
+    private void riport() {
+
     }
 
     private String getName() {
