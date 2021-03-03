@@ -22,6 +22,8 @@ class CitizenDaoTest {
     @Autowired
     private CitizenDao dao;
 
+    private CovidFileManager cfm = new CovidFileManager();
+
     @BeforeEach
     void setUp() {
         flyway.clean();
@@ -34,15 +36,9 @@ class CitizenDaoTest {
     }
 
     @Test
-    void validSsn() {
-        assertTrue(dao.validSsn("123456788"));
-        assertFalse(dao.validSsn("123456787"));
-    }
-
-    @Test
     void uploadCitizensFromFile() {
         assertEquals("Sikeresen feltöltve 1000 páciens (oszlopok: Név;Irányítószám;Életkor;E-mail cím;Taj szám).",
-                dao.uploadCitizensFromFile("registered-persons-1000.csv"));
+                cfm.uploadCitizensFromFile("registered-persons-1000.csv"));
     }
 
     @Test

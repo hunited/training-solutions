@@ -4,9 +4,12 @@ import java.util.Scanner;
 
 import static java.lang.System.*;
 
-public class CovidMain extends CitizenDao {
+public class CovidMain {
 
-    private static final Scanner scanner = new Scanner(in);
+    private final Scanner scanner = new Scanner(in);
+    private final Validator validator = new Validator();
+    private final CitizenDao dao = new CitizenDao();
+    private final CovidFileManager cfm = new CovidFileManager();
 
     public void runMenu() {
         printMenu();
@@ -61,7 +64,7 @@ public class CovidMain extends CitizenDao {
         out.println("Covid oltás regisztráció");
         Citizen citizen = new Citizen(getName(), getZip(), getAge(), getEmail(), getSsn());
         try {
-            uploadCitizenToDb(citizen);
+            dao.uploadCitizenToDb(citizen);
             out.println("Paciens sikeresen hozzáadva az adatbázishoz!");
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
@@ -72,7 +75,7 @@ public class CovidMain extends CitizenDao {
         out.println("Covid oltás kötegelt regisztráció");
         out.println("Kérem adja meg a fájlnevet!");
         try {
-            out.println(uploadCitizensFromFile(scanner.nextLine()));
+            out.println(cfm.uploadCitizensFromFile(scanner.nextLine()));
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
         }
@@ -82,10 +85,10 @@ public class CovidMain extends CitizenDao {
         out.println("Irányítószámos lista generálása fájlba");
         try {
             out.println("Kérem adja meg az irányítószámot");
-            String zip = hasZipInCitizens(scanner.nextLine());
+            String zip = dao.hasZipInCitizens(scanner.nextLine());
             out.println("Kérem adja meg a fájlnevet!");
             String fileName = scanner.nextLine();
-            saveListToFile(zip, fileName);
+            cfm.saveListToFile(zip, fileName);
             out.println("A fáljl elmentve az src/main/resources/covid/" + fileName + " fájlba!");
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
@@ -96,7 +99,7 @@ public class CovidMain extends CitizenDao {
     private String getName() {
         out.println("Kérem adja meg a paciens nevét!");
         try {
-            return validateName(scanner.nextLine());
+            return validator.validateName(scanner.nextLine());
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
             return getName();
@@ -106,7 +109,7 @@ public class CovidMain extends CitizenDao {
     private String getZip() {
         out.println("Kérem adja meg a paciens irányítószámát!");
         try {
-            return validateZip(scanner.nextLine());
+            return validator.validateZip(scanner.nextLine());
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
             return getZip();
@@ -116,7 +119,7 @@ public class CovidMain extends CitizenDao {
     private int getAge() {
         out.println("Kérem adja meg a paciens életkorát!");
         try {
-            return validateAge(Integer.parseInt(scanner.nextLine()));
+            return validator.validateAge(Integer.parseInt(scanner.nextLine()));
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
             return getAge();
@@ -126,7 +129,7 @@ public class CovidMain extends CitizenDao {
     private String getEmail() {
         out.println("Kérem adja meg a paciens e-mail címét!");
         try {
-            String email = validateEmail(scanner.nextLine());
+            String email = validator.validateEmail(scanner.nextLine());
             return reCheckEmail(email);
 
         } catch (IllegalArgumentException iae) {
@@ -149,7 +152,7 @@ public class CovidMain extends CitizenDao {
     private String getSsn() {
         out.println("Kérem adja meg a paciens TB számát!");
         try {
-            return validateSSN(scanner.nextLine());
+            return validator.validateSSN(scanner.nextLine());
         } catch (IllegalArgumentException iae) {
             throwIAE(iae);
             return getSsn();
