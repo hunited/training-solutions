@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +25,9 @@ class CitizenDaoTest {
     @Autowired
     private CitizenDao dao;
 
-    private CovidFileManager cfm = new CovidFileManager();
+    private final Citizen citizen = new Citizen(
+            "Gasparics Sándor", "2100", 40, "hunited@gmail.com", "123458603"
+    );
 
     @BeforeEach
     void setUp() {
@@ -36,15 +41,64 @@ class CitizenDaoTest {
     }
 
     @Test
-    void uploadCitizensFromFile() {
-        assertEquals("Sikeresen feltöltve 1000 páciens (oszlopok: Név;Irányítószám;Életkor;E-mail cím;Taj szám).",
-                cfm.uploadCitizensFromFile("registered-persons-1000.csv"));
+    void uploadCitizenToDb() {
+        assertEquals(1, dao.uploadCitizenToDb(citizen));
     }
 
     @Test
-    void uploadCitizenToDb() {
-        Citizen citizen = new Citizen("Gasparics Sándor", "2100", 40, "hunited@gmail.com", "123458603");
-        assertEquals(1, dao.uploadCitizenToDb(citizen));
+    void hasZipInCitizens() {
+        dao.uploadCitizenToDb(citizen);
+        assertEquals("2100", dao.hasZipInCitizens(citizen.getZipCode()));
+    }
+
+    @Test
+    void hasSuitableTajInCitizens() {
+        dao.uploadCitizenToDb(citizen);
+        assertEquals(1, dao.hasSuitableTajInCitizens(citizen.getSsn()));
+    }
+
+    @Test
+    void firstVaccinationType() {
+        dao.uploadCitizenToDb(citizen);
+        int id = dao.hasSuitableTajInCitizens(citizen.getSsn());
+        assertNull(dao.firstVaccinationType(id));
+    }
+
+    @Test
+    void listRowsByZip() {
+        dao.uploadCitizenToDb(citizen);
+        List<String> result = dao.listRowsByZip(citizen.getZipCode());
+        assertEquals("Időpont;Név;Irányítószám;Életkor;E-mail cím;TAJ szám", result.get(0));
+        assertEquals("08:00;Gasparics Sándor;2100;40;hunited@gmail.com;123458603", result.get(1));
+    }
+
+    @Test
+    void successfulVaccination() {
+        dao.uploadCitizenToDb(citizen);
+        int id = dao.hasSuitableTajInCitizens(citizen.getSsn());
+        assertEquals(1, dao.successfulVaccination(id, LocalDateTime.now(), VaccinationType.SINOPHARM));
+    }
+
+    @Test
+    void unsuccessfulVaccination() {
+        dao.uploadCitizenToDb(citizen);
+        int id = dao.hasSuitableTajInCitizens(citizen.getSsn());
+        assertEquals(1, dao.unsuccessfulVaccination(id, LocalDateTime.now(), "Teszt sikertelen"));
+    }
+
+    @Test
+    void queryZipCodes() {
+        dao.uploadCitizenToDb(citizen);
+        List<String> asserted = List.of(citizen.getZipCode());
+        assertEquals(asserted, dao.queryZipCodes());
+    }
+
+    @Test
+    void queryNumberOfVaccinations() {
+        dao.uploadCitizenToDb(citizen);
+        Map<Integer, Integer> asserted = new HashMap<>();
+        asserted.put(0, 1);
+        assertEquals(asserted, dao.queryNumberOfVaccinations(citizen.getZipCode()));
     }
 
 }

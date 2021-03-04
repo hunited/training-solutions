@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CitizenDao {
@@ -37,7 +40,6 @@ public class CitizenDao {
                 (resultSet, i) -> resultSet.getString("settlement"), zipCode);
     }
 
-    @Transactional
     public long uploadCitizenToDb(Citizen citizen) {
         KeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
@@ -64,21 +66,28 @@ public class CitizenDao {
         return zipCode;
     }
 
-    public int hasSuitableTajInCitizens(String taj) {
+    public Integer hasSuitableTajInCitizens(String taj) {
         String query = """
-                SELECT `citizen_id`
+                SELECT `citizen_id`, `number_of_vaccination`
                 FROM `citizens`
                 WHERE `taj` = ? AND `number_of_vaccination` < 2 AND (
                     `last_vaccination` < ? OR `last_vaccination` IS NULL
-                ) LIMIT 1""";
+                ) LIMIT 1;""";
         List<Integer> result = jdbcTemplate.query(
-                query, (resultSet, i) -> resultSet.getInt("citizen_id"),
-                taj, MINUS_15_DAY
+                query, (resultSet, i) -> resultSet.getInt("citizen_id"), taj, MINUS_15_DAY
         );
         if (result.isEmpty()) {
             throw new IllegalArgumentException("Ezzel a TAJ számmal nincs paciens az adatbázisban, vagy jelenleg nem jogosult az oltásra!");
         }
-        return result.get(0);
+        return result.iterator().next();
+    }
+
+    public VaccinationType firstVaccinationType(int citizenId) {
+        List<VaccinationType> type = jdbcTemplate.query(
+                "SELECT `vaccination_type` FROM `vaccinations` WHERE `citizen_id` = ? AND `status` = 'Sikeres' LIMIT 1;",
+                (resultSet, i) -> VaccinationType.valueOf(resultSet.getString("vaccination_type")), citizenId
+        );
+        return type.isEmpty() ? null : type.get(0);
     }
 
     public List<String> listRowsByZip(String zip) {
@@ -99,6 +108,71 @@ public class CitizenDao {
                 zip, MINUS_15_DAY
         );
         return getTimeTable(result);
+    }
+
+    @Transactional
+    public long successfulVaccination(int citizenId, LocalDateTime date, VaccinationType type) {
+        updateCitizens(citizenId, date);
+        return insertVaccinations(citizenId, date, type);
+    }
+
+    public long unsuccessfulVaccination(int citizenId, LocalDateTime date, String note) {
+        String vaccinationsQuery = "INSERT INTO `vaccinations`(`citizen_id`, `vaccination_date`, `status`, `note`) VALUES (?, ?, ?, ?);";
+        KeyHolder holder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(vaccinationsQuery, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, citizenId);
+            statement.setTimestamp(2, Timestamp.valueOf(date));
+            statement.setString(3, "Sikertelen");
+            statement.setString(4, note);
+            return statement;
+        }, holder);
+        return Objects.requireNonNull(holder.getKey()).longValue();
+    }
+
+    public List<String> queryZipCodes() {
+        return jdbcTemplate.query(
+                "SELECT `zip` FROM `citizens` WHERE 1 GROUP BY `zip` ORDER BY `zip`;",
+                (resultSet, rowNumber) -> resultSet.getString("zip")
+        );
+    }
+
+    public Map<Integer, Integer> queryNumberOfVaccinations(String zip) {
+        String query = """
+                SELECT `number_of_vaccination`, COUNT(`number_of_vaccination`) AS `piece`
+                FROM `citizens`
+                WHERE `zip` = ?
+                GROUP BY `number_of_vaccination` ORDER BY `number_of_vaccination`;""";
+        Map<Integer, Integer> result = new HashMap<>();
+        jdbcTemplate.query(query, (resultSet, rowNumber) -> result.put(
+                resultSet.getInt("number_of_vaccination"), resultSet.getInt("piece")), zip
+        );
+        return result;
+    }
+
+    private void updateCitizens(int citizenId, LocalDateTime date) {
+        String citizensQuery = """
+                UPDATE `citizens`
+                SET `number_of_vaccination` = `number_of_vaccination` + 1, `last_vaccination`= ?
+                WHERE `citizen_id` = ?;""";
+        jdbcTemplate.update(citizensQuery, Timestamp.valueOf(date), citizenId);
+    }
+
+    private long insertVaccinations(int citizenId, LocalDateTime date, VaccinationType type) {
+        String vaccinationsQuery = """
+                INSERT INTO `vaccinations`(`citizen_id`, `vaccination_date`, `status`, `note`, `vaccination_type`)
+                VALUES (?, ?, ?, ?, ?);""";
+        KeyHolder holder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(vaccinationsQuery, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, citizenId);
+            statement.setTimestamp(2, Timestamp.valueOf(date));
+            statement.setString(3, "Sikeres");
+            statement.setString(4, "Az oltást a paciens elfogadta, annak beadása sikeresen megtörtént.");
+            statement.setString(5, type.toString());
+            return statement;
+        }, holder);
+        return Objects.requireNonNull(holder.getKey()).longValue();
     }
 
     private List<String> getTimeTable(List<String> result) {
