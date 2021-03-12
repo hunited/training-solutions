@@ -224,7 +224,7 @@ Lambda kifejezések
 
 * [lambdaintro](src/main/java/lambdaintro/) - Bevezetés a lambda kifejezések használatába
 * [lambdaoptional](src/main/java/lambdaoptional/) - Optional használata
-* lambdacomparator - Comparator módosítások
+* [lambdacomparator](src/main/java/lambdacomparator/) - Comparator módosítások
 
 Streamek
 
