@@ -228,7 +228,7 @@ Lambda kifejezések
 
 Streamek
 
-* lambdastreams - Streamek
+* [lambdastreams](src/main/java/lambdastreams/) - Streamek
 * lambdaintermediate - Intermediate műveletek
 * lambdaprimitives - Primitívek használata streamekben
 * lambdacollectors - Collectors
